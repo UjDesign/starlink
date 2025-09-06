@@ -1,15 +1,18 @@
 {
   "name": "starlink-contracts",
   "version": "1.0.0",
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.4.0",
-    "truffle": "^5.11.5",
-    "truffle-hdwallet-provider": "^1.0.17",
-    "dotenv": "^16.4.5"
-  },
+  "description": "星链MVP智能合约",
   "scripts": {
     "compile": "truffle compile",
-    "migrate": "truffle migrate --network mumbai"
+    "migrate": "truffle migrate --network amoy"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.4.0",
+    "truffle": "5.11.5",
+    "truffle-hdwallet-provider": "1.0.17",
+    "solc": "0.8.24"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
-    

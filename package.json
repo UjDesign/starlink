@@ -1,18 +1,15 @@
 {
   "name": "starlink-mvp",
   "version": "1.0.0",
-  "description": "Web3短视频平台星链MVP",
+  "description": "星链Web3短视频平台MVP",
   "scripts": {
-    "postinstall": "cd contracts && npm install && cd ../backend && npm install && cd ../frontend && npm install",
-    "deploy": "./deploy.sh",
-    "test": "cd tests && npm test"
+    "start": "docker compose up -d",
+    "stop": "docker compose down",
+    "logs": "docker compose logs -f",
+    "clean": "rm -rf */node_modules && docker compose down -v"
   },
-  "engines": {
-    "node": ">=20.0.0",
-    "npm": ">=10.0.0"
-  },
-  "devDependencies": {
-    "npm-check-updates": "^16.14.20"
-  }
+  "keywords": ["web3", "nft", "短视频"],
+  "author": "",
+  "license": "MIT"
 }
     

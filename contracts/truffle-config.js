@@ -1,29 +1,27 @@
+
 require('dotenv').config();
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 module.exports = {
   networks: {
-    development: {
-      host: "127.0.0.1",
-      port: 7545,
-      network_id: "*" // 匹配任何网络
-    },
-    mumbai: {
+    // 移除或注释原 Mumbai 配置，添加 Amoy 配置
+    amoy: {
       provider: () => new HDWalletProvider(
-        process.env.PRIVATE_KEY,
-        process.env.PROVIDER_URL
+        process.env.PRIVATE_KEY,  // 部署钱包私钥
+        process.env.PROVIDER_URL  // Amoy 节点 URL（见下文说明）
       ),
-      network_id: 80001,
-      confirmations: 2,
-      timeoutBlocks: 200,
-      skipDryRun: true,
-      gas: 6721975,
-      gasPrice: 20000000000 // 20 gwei
+      network_id: 80002,  // Amoy 测试网链 ID（固定值）
+      gas: 5500000,       // 建议的 Gas 限制
+      confirmations: 2,   // 区块确认数
+      timeoutBlocks: 200, // 超时区块数
+      skipDryRun: true    // 跳过 dry run（测试网可选）
     }
   },
+
+  // 编译器配置（保持不变，确保与 OpenZeppelin 5.4.0 兼容）
   compilers: {
     solc: {
-      version: "0.8.24", // 与OpenZeppelin 5.4.0兼容的最新版本
+      version: "0.8.24",  // 与 Amoy 测试网兼容的 Solidity 版本
       settings: {
         optimizer: {
           enabled: true,
@@ -31,7 +29,5 @@ module.exports = {
         }
       }
     }
-  },
-  contracts_build_directory: "./build/contracts"
+  }
 };
-    

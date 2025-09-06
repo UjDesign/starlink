@@ -1,9 +1,10 @@
-version: '3.8'
+version: '3.8'  # 兼容docker compose v2
 
 services:
+  # MongoDB服务
   mongodb:
-    image: mongo:7.0.5
-    container_name: starlink-mongo
+    image: mongo:7.0.5  # 最新稳定版
+    container_name: starlink-mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
@@ -11,46 +12,54 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')", "-u", "${MONGO_USERNAME}", "-p", "${MONGO_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
+  # IPFS节点
   ipfs:
-    image: ipfs/kubo:v0.27.0
+    image: ipfs/kubo:v0.27.0  # 最新稳定版
     container_name: starlink-ipfs
     ports:
       - "4001:4001"
       - "5001:5001"
-      - "8080:8080"
+      - "8080:8080"  # IPFS网关
     volumes:
       - ipfs-data:/data/ipfs
-    restart: unless-stopped
 
+  # 后端API服务
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: starlink-backend
-    depends_on:
-      - mongodb
-      - ipfs
     environment:
       - NODE_ENV=production
-      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/starlink?authSource=admin
-      - IPFS_API_URL=http://ipfs:5001/api/v0
-      - PORT=5000
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB}?authSource=admin
+      - IPFS_URL=http://ipfs:5001
+      - CONTENT_NFT_ADDRESS=${CONTENT_NFT_ADDRESS}
+      - STAR_TOKEN_ADDRESS=${STAR_TOKEN_ADDRESS}
+      - PROVIDER_URL=${PROVIDER_URL}
     ports:
       - "5000:5000"
-    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      ipfs:
+        condition: service_started
 
+  # 前端应用
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: starlink-frontend
-    depends_on:
-      - backend
     ports:
       - "3000:80"
-    restart: unless-stopped
+    depends_on:
+      - backend
 
 volumes:
   mongo-data:
