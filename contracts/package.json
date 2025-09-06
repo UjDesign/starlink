@@ -1,0 +1,15 @@
+{
+  "name": "starlink-contracts",
+  "version": "1.0.0",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "truffle": "^5.11.5",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "dotenv": "^16.4.5"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --network mumbai"
+  }
+}
+    

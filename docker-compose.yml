@@ -1,66 +1,58 @@
 version: '3.8'
 
 services:
-  # MongoDB服务
   mongodb:
-    image: mongo:latest
-    container_name: starlink-mongodb
-    restart: always
+    image: mongo:7.0.5
+    container_name: starlink-mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
-    networks:
-      - starlink-network
+      - mongo-data:/data/db
+    restart: unless-stopped
 
-  # 后端API服务
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: starlink-backend
-    restart: always
-    depends_on:
-      - mongodb
-    environment:
-      - NODE_ENV=production
-      - PORT=5000
-      - MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/starlink?authSource=admin
-      - PROVIDER_URL=${PROVIDER_URL}
-      - CONTENT_NFT_ADDRESS=${CONTENT_NFT_ADDRESS}
-      - STAR_TOKEN_ADDRESS=${STAR_TOKEN_ADDRESS}
-      - PRIVATE_KEY=${PRIVATE_KEY}
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-      - ./uploads:/app/uploads
-    networks:
-      - starlink-network
-
-  # IPFS节点
   ipfs:
-    image: ipfs/go-ipfs:latest
+    image: ipfs/kubo:v0.27.0
     container_name: starlink-ipfs
-    restart: always
     ports:
       - "4001:4001"
       - "5001:5001"
       - "8080:8080"
     volumes:
-      - ipfs_data:/data/ipfs
-    networks:
-      - starlink-network
+      - ipfs-data:/data/ipfs
+    restart: unless-stopped
 
-networks:
-  starlink-network:
-    driver: bridge
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: starlink-backend
+    depends_on:
+      - mongodb
+      - ipfs
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/starlink?authSource=admin
+      - IPFS_API_URL=http://ipfs:5001/api/v0
+      - PORT=5000
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: starlink-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    restart: unless-stopped
 
 volumes:
-  mongodb_data:
-  ipfs_data:
+  mongo-data:
+  ipfs-data:
     
