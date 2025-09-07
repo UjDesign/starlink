@@ -114,22 +114,31 @@ main() {
   cd .. || error "返回根目录失败"
 
   # 8. 部署智能合约到Polygon amoy
+    # 在deploy.sh中“部署合约到Polygon amoy测试网...”后添加：
   info "部署合约到Polygon amoy测试网..."
-  cd contracts || error "进入contracts目录失败"
-  truffle migrate --network amoy || error "合约部署失败"
-  
-  # 提取合约地址
-  local CONTENT_NFT_ADDRESS=$(jq -r '.networks."80001".address' build/contracts/ContentNFT.json)
-  local STAR_TOKEN_ADDRESS=$(jq -r '.networks."80001".address' build/contracts/StarToken.json)
-  
-  check_env "$CONTENT_NFT_ADDRESS" "CONTENT_NFT_ADDRESS"
-  check_env "$STAR_TOKEN_ADDRESS" "STAR_TOKEN_ADDRESS"
-  
-  # 写入.env文件
-  echo "CONTENT_NFT_ADDRESS=$CONTENT_NFT_ADDRESS" >> .env
-  echo "STAR_TOKEN_ADDRESS=$STAR_TOKEN_ADDRESS" >> .env
-  cp .env ../backend/.env || error "复制合约地址到后端失败"
-  cd .. || error "返回根目录失败"
+  # 执行Truffle迁移，并将输出保存到临时文件（用于提取地址）
+  truffle migrate --network amoy > migrate_output.txt || error "合约部署失败"
+
+  # 提取ContentNFT合约地址（需根据你的迁移脚本文件名调整，如2_deploy_contracts.js）
+  CONTENT_NFT_ADDR=$(grep -A1 "ContentNFT deployed at" migrate_output.txt | grep -o '0x[0-9a-fA-F]*')
+  # 提取StarToken合约地址
+  STAR_TOKEN_ADDR=$(grep -A1 "StarToken deployed at" migrate_output.txt | grep -o '0x[0-9a-fA-F]*')
+
+  # 验证地址是否提取成功
+  if [[ -z $CONTENT_NFT_ADDR || -z $STAR_TOKEN_ADDR ]]; then
+    error "未成功提取合约地址，请检查迁移脚本输出"
+  fi
+
+  # 将地址写入.env文件（覆盖原有空值）
+  sed -i '' "s|^CONTENT_NFT_ADDRESS=.*|CONTENT_NFT_ADDRESS=$CONTENT_NFT_ADDR|" .env  # macOS
+  sed -i '' "s|^STAR_TOKEN_ADDRESS=.*|STAR_TOKEN_ADDRESS=$STAR_TOKEN_ADDR|" .env      # macOS
+  # 若为Linux，将sed命令中的 '' 去掉：sed -i "s|^CONTENT_NFT_ADDRESS=.*|..." .env
+
+  info "合约地址已写入.env：ContentNFT=$CONTENT_NFT_ADDR，StarToken=$STAR_TOKEN_ADDR"
+
+  # 删除临时输出文件
+  rm -f migrate_output.txt
+
 
   # 9. 启动服务（使用docker compose v2）
   info "启动所有服务（docker compose）..."
