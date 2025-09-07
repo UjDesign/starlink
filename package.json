@@ -2,14 +2,27 @@
   "name": "starlink-mvp",
   "version": "1.0.0",
   "description": "星链Web3短视频平台MVP",
+  "engines": {
+    "node": ">=20.0.0 <21.0.0"
+  },
   "scripts": {
     "start": "docker compose up -d",
     "stop": "docker compose down",
     "logs": "docker compose logs -f",
     "clean": "rm -rf */node_modules && docker compose down -v"
   },
-  "keywords": ["web3", "nft", "短视频"],
+  "keywords": [
+    "web3",
+    "nft",
+    "短视频"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nvm": "^0.0.4"
+  },
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "dotenv": "^17.2.2"
+  }
 }
-    

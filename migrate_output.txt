@@ -1,0 +1,22 @@
+Error: Cannot find module 'dotenv'
+Require stack:
+- /Users/danny/github/starlink/truffle-config.js
+- /Users/danny/.npm-global/lib/node_modules/truffle/node_modules/original-require/index.js
+- /Users/danny/.npm-global/lib/node_modules/truffle/build/cli.bundled.js
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:1038:27)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/Users/danny/github/starlink/truffle-config.js:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Function.load (/Users/danny/.npm-global/lib/node_modules/truffle/build/webpack:/packages/config/dist/index.js:152:1)
+    at Function.detect (/Users/danny/.npm-global/lib/node_modules/truffle/build/webpack:/packages/config/dist/index.js:144:1)
+    at Object.module.exports [as run] (/Users/danny/.npm-global/lib/node_modules/truffle/build/webpack:/packages/core/lib/commands/migrate/run.js:12:1)
+    at runCommand (/Users/danny/.npm-global/lib/node_modules/truffle/build/webpack:/packages/core/lib/command-utils.js:297:1)
+Truffle v5.11.5 (core: 5.11.5)
+Node v20.19.5

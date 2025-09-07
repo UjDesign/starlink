@@ -115,9 +115,15 @@ main() {
 
   # 8. 部署智能合约到Polygon amoy
     # 在deploy.sh中“部署合约到Polygon amoy测试网...”后添加：
-  info "部署合约到Polygon amoy测试网..."
+  info "部署合约到Polygon amoy测试网...（日志将保存到 deploy_error.log）"
   # 执行Truffle迁移，并将输出保存到临时文件（用于提取地址）
-  truffle migrate --network amoy > migrate_output.txt || error "合约部署失败"
+  if ! truffle migrate --network amoy 2>&1 | tee deploy_error.log; then
+    error "合约部署失败！详细日志见 deploy_error.log"
+    # 输出日志前10行，快速提示关键错误
+    echo -e "\n=== 部署错误日志（前10行）==="
+    head -n 10 deploy_error.log
+    exit 1  # 退出脚本，避免继续执行后续步骤
+  fi
 
   # 提取ContentNFT合约地址（需根据你的迁移脚本文件名调整，如2_deploy_contracts.js）
   CONTENT_NFT_ADDR=$(grep -A1 "ContentNFT deployed at" migrate_output.txt | grep -o '0x[0-9a-fA-F]*')
