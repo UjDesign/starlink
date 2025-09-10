@@ -52,7 +52,7 @@ main() {
   info "当前Node.js版本: $(node -v)"
   info "当前npm版本: $(npm -v)"
   info "当前truffle版本: $(truffle version | head -n 1)"
-  info "当前docker compose版本: $(docker compose version | head -n 1)"
+  info "当前docker版本: $(docker version | head -n 1)"
 
   # 3. 加载系统环境配置
   info "加载系统环境配置..."
@@ -60,7 +60,7 @@ main() {
 
   # 4. 检查系统依赖
   info "检查系统依赖..."
-  local tools=("docker" "docker compose" "truffle" "npm" "jq")
+  local tools=("docker" "truffle" "npm" "jq")
   for tool in "${tools[@]}"; do
     if ! command -v ${tool%% *} &> /dev/null; then  # 处理带空格的命令
       error "未找到工具 $tool，请先安装"
