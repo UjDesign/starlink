@@ -1,0 +1,259 @@
+{
+  "contractName": "IERC2309",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "fromTokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "toTokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "fromAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "toAddress",
+          "type": "address"
+        }
+      ],
+      "name": "ConsecutiveTransfer",
+      "type": "event"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"fromTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"toTokenId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"fromAddress\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"toAddress\",\"type\":\"address\"}],\"name\":\"ConsecutiveTransfer\",\"type\":\"event\"}],\"devdoc\":{\"details\":\"ERC-2309: ERC-721 Consecutive Transfer Extension. _Available since v4.8._\",\"events\":{\"ConsecutiveTransfer(uint256,uint256,address,address)\":{\"details\":\"Emitted when the tokens from `fromTokenId` to `toTokenId` are transferred from `fromAddress` to `toAddress`.\"}},\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2309.sol\":\"IERC2309\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2309.sol\":{\"keccak256\":\"0x769b8c97e7ceca35514f85dcf77ea7e9da1c9a3b3b9c119dda811cd8394aa601\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://113df79cc1cae24c055be91b41febfa2dbb28089c969547f7ca3ca5d23d308f6\",\"dweb:/ipfs/QmTwrtF69W9G3t9VbUjF6P1m6jNW4dh6y3kE5vQqUdsSnr\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.8.0) (interfaces/IERC2309.sol)\n\npragma solidity ^0.8.0;\n\n/**\n * @dev ERC-2309: ERC-721 Consecutive Transfer Extension.\n *\n * _Available since v4.8._\n */\ninterface IERC2309 {\n    /**\n     * @dev Emitted when the tokens from `fromTokenId` to `toTokenId` are transferred from `fromAddress` to `toAddress`.\n     */\n    event ConsecutiveTransfer(\n        uint256 indexed fromTokenId,\n        uint256 toTokenId,\n        address indexed fromAddress,\n        address indexed toAddress\n    );\n}\n",
+  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2309.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2309.sol",
+    "exportedSymbols": {
+      "IERC2309": [
+        17763
+      ]
+    },
+    "id": 17764,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 17750,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "107:23:458"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IERC2309",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 17751,
+          "nodeType": "StructuredDocumentation",
+          "src": "132:95:458",
+          "text": " @dev ERC-2309: ERC-721 Consecutive Transfer Extension.\n _Available since v4.8._"
+        },
+        "fullyImplemented": true,
+        "id": 17763,
+        "linearizedBaseContracts": [
+          17763
+        ],
+        "name": "IERC2309",
+        "nameLocation": "238:8:458",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 17752,
+              "nodeType": "StructuredDocumentation",
+              "src": "253:132:458",
+              "text": " @dev Emitted when the tokens from `fromTokenId` to `toTokenId` are transferred from `fromAddress` to `toAddress`."
+            },
+            "eventSelector": "deaa91b6123d068f5821d0fb0678463d1a8a6079fe8af5de3ce5e896dcf9133d",
+            "id": 17762,
+            "name": "ConsecutiveTransfer",
+            "nameLocation": "396:19:458",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 17761,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 17754,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "fromTokenId",
+                  "nameLocation": "441:11:458",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17762,
+                  "src": "425:27:458",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 17753,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "425:7:458",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 17756,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "toTokenId",
+                  "nameLocation": "470:9:458",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17762,
+                  "src": "462:17:458",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 17755,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "462:7:458",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 17758,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "fromAddress",
+                  "nameLocation": "505:11:458",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17762,
+                  "src": "489:27:458",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 17757,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "489:7:458",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 17760,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "toAddress",
+                  "nameLocation": "542:9:458",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 17762,
+                  "src": "526:25:458",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 17759,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "526:7:458",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "415:142:458"
+            },
+            "src": "390:168:458"
+          }
+        ],
+        "scope": 17764,
+        "src": "228:332:458",
+        "usedErrors": [],
+        "usedEvents": [
+          17762
+        ]
+      }
+    ],
+    "src": "107:454:458"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.24+commit.e11b9ed9.Linux.g++"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2025-09-14T12:28:56.092Z",
+  "devdoc": {
+    "details": "ERC-2309: ERC-721 Consecutive Transfer Extension. _Available since v4.8._",
+    "events": {
+      "ConsecutiveTransfer(uint256,uint256,address,address)": {
+        "details": "Emitted when the tokens from `fromTokenId` to `toTokenId` are transferred from `fromAddress` to `toAddress`."
+      }
+    },
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

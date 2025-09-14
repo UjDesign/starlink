@@ -114,37 +114,32 @@ main() {
   cd .. || error "返回根目录失败"
 
   # 8. 部署智能合约到Polygon amoy
-    # 在deploy.sh中“部署合约到Polygon amoy测试网...”后添加：
-  info "部署合约到Polygon amoy测试网...（日志将保存到 deploy_error.log）"
-  # 执行Truffle迁移，并将输出保存到临时文件（用于提取地址）
-  if ! truffle migrate --network amoy 2>&1 | tee deploy_error.log; then
-    error "合约部署失败！详细日志见 deploy_error.log"
-    # 输出日志前10行，快速提示关键错误
-    echo -e "\n=== 部署错误日志（前10行）==="
-    head -n 10 deploy_error.log
-    exit 1  # 退出脚本，避免继续执行后续步骤
+  info "部署合约到本地 Ganache 网络... (日志将保存到 deploy_output.log)"
+  # 执行Truffle迁移，并使用 --reset 标志强制重新部署
+  # Truffle is run from the root, it will find the config in ./contracts/
+  if ! truffle migrate --network development --reset 2>&1 | tee deploy_output.log; then
+    error "合约部署失败! 详细日志见 deploy_output.log"
+    exit 1
   fi
 
-  # 提取ContentNFT合约地址（需根据你的迁移脚本文件名调整，如2_deploy_contracts.js）
-  CONTENT_NFT_ADDR=$(grep -A1 "ContentNFT deployed at" migrate_output.txt | grep -o '0x[0-9a-fA-F]*')
-  # 提取StarToken合约地址
-  STAR_TOKEN_ADDR=$(grep -A1 "StarToken deployed at" migrate_output.txt | grep -o '0x[0-9a-fA-F]*')
+  # 从正确的输出文件中提取合约地址
+  # This looks for the line "contract address:" and prints the last word on that line.
+  CONTENT_NFT_ADDR=$(grep 'ContentNFT:' deploy_output.log -A 1 | grep 'contract address:' | awk '{print $NF}')
+  STAR_TOKEN_ADDR=$(grep 'StarToken:' deploy_output.log -A 1 | grep 'contract address:' | awk '{print $NF}')
 
   # 验证地址是否提取成功
   if [[ -z $CONTENT_NFT_ADDR || -z $STAR_TOKEN_ADDR ]]; then
-    error "未成功提取合约地址，请检查迁移脚本输出"
+    error "未成功提取合约地址，请检查 deploy_output.log"
   fi
 
   # 将地址写入.env文件（覆盖原有空值）
   sed -i '' "s|^CONTENT_NFT_ADDRESS=.*|CONTENT_NFT_ADDRESS=$CONTENT_NFT_ADDR|" .env  # macOS
   sed -i '' "s|^STAR_TOKEN_ADDRESS=.*|STAR_TOKEN_ADDRESS=$STAR_TOKEN_ADDR|" .env      # macOS
-  # 若为Linux，将sed命令中的 '' 去掉：sed -i "s|^CONTENT_NFT_ADDRESS=.*|..." .env
 
   info "合约地址已写入.env：ContentNFT=$CONTENT_NFT_ADDR，StarToken=$STAR_TOKEN_ADDR"
 
   # 删除临时输出文件
-  rm -f migrate_output.txt
-
+  rm -f deploy_output.log
 
   # 9. 启动服务（使用docker compose v2）
   info "启动所有服务（docker compose）..."

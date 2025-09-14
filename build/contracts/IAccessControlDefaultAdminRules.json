@@ -1,0 +1,1320 @@
+{
+  "contractName": "IAccessControlDefaultAdminRules",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "DefaultAdminDelayChangeCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint48",
+          "name": "newDelay",
+          "type": "uint48"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint48",
+          "name": "effectSchedule",
+          "type": "uint48"
+        }
+      ],
+      "name": "DefaultAdminDelayChangeScheduled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "DefaultAdminTransferCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newAdmin",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint48",
+          "name": "acceptSchedule",
+          "type": "uint48"
+        }
+      ],
+      "name": "DefaultAdminTransferScheduled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "defaultAdmin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingDefaultAdmin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "newAdmin",
+          "type": "address"
+        },
+        {
+          "internalType": "uint48",
+          "name": "acceptSchedule",
+          "type": "uint48"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "defaultAdminDelay",
+      "outputs": [
+        {
+          "internalType": "uint48",
+          "name": "",
+          "type": "uint48"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingDefaultAdminDelay",
+      "outputs": [
+        {
+          "internalType": "uint48",
+          "name": "newDelay",
+          "type": "uint48"
+        },
+        {
+          "internalType": "uint48",
+          "name": "effectSchedule",
+          "type": "uint48"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newAdmin",
+          "type": "address"
+        }
+      ],
+      "name": "beginDefaultAdminTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "cancelDefaultAdminTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "acceptDefaultAdminTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint48",
+          "name": "newDelay",
+          "type": "uint48"
+        }
+      ],
+      "name": "changeDefaultAdminDelay",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rollbackDefaultAdminDelay",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "defaultAdminDelayIncreaseWait",
+      "outputs": [
+        {
+          "internalType": "uint48",
+          "name": "",
+          "type": "uint48"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[],\"name\":\"DefaultAdminDelayChangeCanceled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint48\",\"name\":\"newDelay\",\"type\":\"uint48\"},{\"indexed\":false,\"internalType\":\"uint48\",\"name\":\"effectSchedule\",\"type\":\"uint48\"}],\"name\":\"DefaultAdminDelayChangeScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DefaultAdminTransferCanceled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint48\",\"name\":\"acceptSchedule\",\"type\":\"uint48\"}],\"name\":\"DefaultAdminTransferScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptDefaultAdminTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"beginDefaultAdminTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cancelDefaultAdminTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint48\",\"name\":\"newDelay\",\"type\":\"uint48\"}],\"name\":\"changeDefaultAdminDelay\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultAdmin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultAdminDelay\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultAdminDelayIncreaseWait\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingDefaultAdmin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"},{\"internalType\":\"uint48\",\"name\":\"acceptSchedule\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingDefaultAdminDelay\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"newDelay\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"effectSchedule\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rollbackDefaultAdminDelay\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"External interface of AccessControlDefaultAdminRules declared to support ERC165 detection. _Available since v4.9._\",\"events\":{\"DefaultAdminDelayChangeCanceled()\":{\"details\":\"Emitted when a {pendingDefaultAdminDelay} is reset if its schedule didn't pass.\"},\"DefaultAdminDelayChangeScheduled(uint48,uint48)\":{\"details\":\"Emitted when a {defaultAdminDelay} change is started, setting `newDelay` as the next delay to be applied between default admin transfer after `effectSchedule` has passed.\"},\"DefaultAdminTransferCanceled()\":{\"details\":\"Emitted when a {pendingDefaultAdmin} is reset if it was never accepted, regardless of its schedule.\"},\"DefaultAdminTransferScheduled(address,uint48)\":{\"details\":\"Emitted when a {defaultAdmin} transfer is started, setting `newAdmin` as the next address to become the {defaultAdmin} by calling {acceptDefaultAdminTransfer} only after `acceptSchedule` passes.\"},\"RoleAdminChanged(bytes32,bytes32,bytes32)\":{\"details\":\"Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted signaling this. _Available since v3.1._\"},\"RoleGranted(bytes32,address,address)\":{\"details\":\"Emitted when `account` is granted `role`. `sender` is the account that originated the contract call, an admin role bearer except when using {AccessControl-_setupRole}.\"},\"RoleRevoked(bytes32,address,address)\":{\"details\":\"Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)\"}},\"kind\":\"dev\",\"methods\":{\"acceptDefaultAdminTransfer()\":{\"details\":\"Completes a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}. After calling the function: - `DEFAULT_ADMIN_ROLE` should be granted to the caller. - `DEFAULT_ADMIN_ROLE` should be revoked from the previous holder. - {pendingDefaultAdmin} should be reset to zero values. Requirements: - Only can be called by the {pendingDefaultAdmin}'s `newAdmin`. - The {pendingDefaultAdmin}'s `acceptSchedule` should've passed.\"},\"beginDefaultAdminTransfer(address)\":{\"details\":\"Starts a {defaultAdmin} transfer by setting a {pendingDefaultAdmin} scheduled for acceptance after the current timestamp plus a {defaultAdminDelay}. Requirements: - Only can be called by the current {defaultAdmin}. Emits a DefaultAdminRoleChangeStarted event.\"},\"cancelDefaultAdminTransfer()\":{\"details\":\"Cancels a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}. A {pendingDefaultAdmin} not yet accepted can also be cancelled with this function. Requirements: - Only can be called by the current {defaultAdmin}. May emit a DefaultAdminTransferCanceled event.\"},\"changeDefaultAdminDelay(uint48)\":{\"details\":\"Initiates a {defaultAdminDelay} update by setting a {pendingDefaultAdminDelay} scheduled for getting into effect after the current timestamp plus a {defaultAdminDelay}. This function guarantees that any call to {beginDefaultAdminTransfer} done between the timestamp this method is called and the {pendingDefaultAdminDelay} effect schedule will use the current {defaultAdminDelay} set before calling. The {pendingDefaultAdminDelay}'s effect schedule is defined in a way that waiting until the schedule and then calling {beginDefaultAdminTransfer} with the new delay will take at least the same as another {defaultAdmin} complete transfer (including acceptance). The schedule is designed for two scenarios: - When the delay is changed for a larger one the schedule is `block.timestamp + newDelay` capped by {defaultAdminDelayIncreaseWait}. - When the delay is changed for a shorter one, the schedule is `block.timestamp + (current delay - new delay)`. A {pendingDefaultAdminDelay} that never got into effect will be canceled in favor of a new scheduled change. Requirements: - Only can be called by the current {defaultAdmin}. Emits a DefaultAdminDelayChangeScheduled event and may emit a DefaultAdminDelayChangeCanceled event.\"},\"defaultAdmin()\":{\"details\":\"Returns the address of the current `DEFAULT_ADMIN_ROLE` holder.\"},\"defaultAdminDelay()\":{\"details\":\"Returns the delay required to schedule the acceptance of a {defaultAdmin} transfer started. This delay will be added to the current timestamp when calling {beginDefaultAdminTransfer} to set the acceptance schedule. NOTE: If a delay change has been scheduled, it will take effect as soon as the schedule passes, making this function returns the new delay. See {changeDefaultAdminDelay}.\"},\"defaultAdminDelayIncreaseWait()\":{\"details\":\"Maximum time in seconds for an increase to {defaultAdminDelay} (that is scheduled using {changeDefaultAdminDelay}) to take effect. Default to 5 days. When the {defaultAdminDelay} is scheduled to be increased, it goes into effect after the new delay has passed with the purpose of giving enough time for reverting any accidental change (i.e. using milliseconds instead of seconds) that may lock the contract. However, to avoid excessive schedules, the wait is capped by this function and it can be overrode for a custom {defaultAdminDelay} increase scheduling. IMPORTANT: Make sure to add a reasonable amount of time while overriding this value, otherwise, there's a risk of setting a high new delay that goes into effect almost immediately without the possibility of human intervention in the case of an input error (eg. set milliseconds instead of seconds).\"},\"getRoleAdmin(bytes32)\":{\"details\":\"Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {AccessControl-_setRoleAdmin}.\"},\"grantRole(bytes32,address)\":{\"details\":\"Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role.\"},\"hasRole(bytes32,address)\":{\"details\":\"Returns `true` if `account` has been granted `role`.\"},\"pendingDefaultAdmin()\":{\"details\":\"Returns a tuple of a `newAdmin` and an accept schedule. After the `schedule` passes, the `newAdmin` will be able to accept the {defaultAdmin} role by calling {acceptDefaultAdminTransfer}, completing the role transfer. A zero value only in `acceptSchedule` indicates no pending admin transfer. NOTE: A zero address `newAdmin` means that {defaultAdmin} is being renounced.\"},\"pendingDefaultAdminDelay()\":{\"details\":\"Returns a tuple of `newDelay` and an effect schedule. After the `schedule` passes, the `newDelay` will get into effect immediately for every new {defaultAdmin} transfer started with {beginDefaultAdminTransfer}. A zero value only in `effectSchedule` indicates no pending delay change. NOTE: A zero value only for `newDelay` means that the next {defaultAdminDelay} will be zero after the effect schedule.\"},\"renounceRole(bytes32,address)\":{\"details\":\"Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`.\"},\"revokeRole(bytes32,address)\":{\"details\":\"Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role.\"},\"rollbackDefaultAdminDelay()\":{\"details\":\"Cancels a scheduled {defaultAdminDelay} change. Requirements: - Only can be called by the current {defaultAdmin}. May emit a DefaultAdminDelayChangeCanceled event.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/node_modules/@openzeppelin/contracts/access/IAccessControlDefaultAdminRules.sol\":\"IAccessControlDefaultAdminRules\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/node_modules/@openzeppelin/contracts/access/IAccessControl.sol\":{\"keccak256\":\"0x59ce320a585d7e1f163cd70390a0ef2ff9cec832e2aa544293a00692465a7a57\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bb2c137c343ef0c4c7ce7b18c1d108afdc9d315a04e48307288d2d05adcbde3a\",\"dweb:/ipfs/QmUxhrAQM3MM3FF5j7AtcXLXguWCJBHJ14BRdVtuoQc8Fh\"]},\"project:/contracts/node_modules/@openzeppelin/contracts/access/IAccessControlDefaultAdminRules.sol\":{\"keccak256\":\"0x4025f2c243843858eba5f4588189430189a6712f12183d9b4e2e876550428a0d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9ce0b03b96d36fbb396539ef9f9f5b4f028549285d1818453f2e263149a8d030\",\"dweb:/ipfs/QmVXaS99dwqB7xxpTr3E5GDrLWZUy5oUJmMRxdqaYndfeR\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.9.0) (access/IAccessControlDefaultAdminRules.sol)\n\npragma solidity ^0.8.0;\n\nimport \"./IAccessControl.sol\";\n\n/**\n * @dev External interface of AccessControlDefaultAdminRules declared to support ERC165 detection.\n *\n * _Available since v4.9._\n */\ninterface IAccessControlDefaultAdminRules is IAccessControl {\n    /**\n     * @dev Emitted when a {defaultAdmin} transfer is started, setting `newAdmin` as the next\n     * address to become the {defaultAdmin} by calling {acceptDefaultAdminTransfer} only after `acceptSchedule`\n     * passes.\n     */\n    event DefaultAdminTransferScheduled(address indexed newAdmin, uint48 acceptSchedule);\n\n    /**\n     * @dev Emitted when a {pendingDefaultAdmin} is reset if it was never accepted, regardless of its schedule.\n     */\n    event DefaultAdminTransferCanceled();\n\n    /**\n     * @dev Emitted when a {defaultAdminDelay} change is started, setting `newDelay` as the next\n     * delay to be applied between default admin transfer after `effectSchedule` has passed.\n     */\n    event DefaultAdminDelayChangeScheduled(uint48 newDelay, uint48 effectSchedule);\n\n    /**\n     * @dev Emitted when a {pendingDefaultAdminDelay} is reset if its schedule didn't pass.\n     */\n    event DefaultAdminDelayChangeCanceled();\n\n    /**\n     * @dev Returns the address of the current `DEFAULT_ADMIN_ROLE` holder.\n     */\n    function defaultAdmin() external view returns (address);\n\n    /**\n     * @dev Returns a tuple of a `newAdmin` and an accept schedule.\n     *\n     * After the `schedule` passes, the `newAdmin` will be able to accept the {defaultAdmin} role\n     * by calling {acceptDefaultAdminTransfer}, completing the role transfer.\n     *\n     * A zero value only in `acceptSchedule` indicates no pending admin transfer.\n     *\n     * NOTE: A zero address `newAdmin` means that {defaultAdmin} is being renounced.\n     */\n    function pendingDefaultAdmin() external view returns (address newAdmin, uint48 acceptSchedule);\n\n    /**\n     * @dev Returns the delay required to schedule the acceptance of a {defaultAdmin} transfer started.\n     *\n     * This delay will be added to the current timestamp when calling {beginDefaultAdminTransfer} to set\n     * the acceptance schedule.\n     *\n     * NOTE: If a delay change has been scheduled, it will take effect as soon as the schedule passes, making this\n     * function returns the new delay. See {changeDefaultAdminDelay}.\n     */\n    function defaultAdminDelay() external view returns (uint48);\n\n    /**\n     * @dev Returns a tuple of `newDelay` and an effect schedule.\n     *\n     * After the `schedule` passes, the `newDelay` will get into effect immediately for every\n     * new {defaultAdmin} transfer started with {beginDefaultAdminTransfer}.\n     *\n     * A zero value only in `effectSchedule` indicates no pending delay change.\n     *\n     * NOTE: A zero value only for `newDelay` means that the next {defaultAdminDelay}\n     * will be zero after the effect schedule.\n     */\n    function pendingDefaultAdminDelay() external view returns (uint48 newDelay, uint48 effectSchedule);\n\n    /**\n     * @dev Starts a {defaultAdmin} transfer by setting a {pendingDefaultAdmin} scheduled for acceptance\n     * after the current timestamp plus a {defaultAdminDelay}.\n     *\n     * Requirements:\n     *\n     * - Only can be called by the current {defaultAdmin}.\n     *\n     * Emits a DefaultAdminRoleChangeStarted event.\n     */\n    function beginDefaultAdminTransfer(address newAdmin) external;\n\n    /**\n     * @dev Cancels a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}.\n     *\n     * A {pendingDefaultAdmin} not yet accepted can also be cancelled with this function.\n     *\n     * Requirements:\n     *\n     * - Only can be called by the current {defaultAdmin}.\n     *\n     * May emit a DefaultAdminTransferCanceled event.\n     */\n    function cancelDefaultAdminTransfer() external;\n\n    /**\n     * @dev Completes a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}.\n     *\n     * After calling the function:\n     *\n     * - `DEFAULT_ADMIN_ROLE` should be granted to the caller.\n     * - `DEFAULT_ADMIN_ROLE` should be revoked from the previous holder.\n     * - {pendingDefaultAdmin} should be reset to zero values.\n     *\n     * Requirements:\n     *\n     * - Only can be called by the {pendingDefaultAdmin}'s `newAdmin`.\n     * - The {pendingDefaultAdmin}'s `acceptSchedule` should've passed.\n     */\n    function acceptDefaultAdminTransfer() external;\n\n    /**\n     * @dev Initiates a {defaultAdminDelay} update by setting a {pendingDefaultAdminDelay} scheduled for getting\n     * into effect after the current timestamp plus a {defaultAdminDelay}.\n     *\n     * This function guarantees that any call to {beginDefaultAdminTransfer} done between the timestamp this\n     * method is called and the {pendingDefaultAdminDelay} effect schedule will use the current {defaultAdminDelay}\n     * set before calling.\n     *\n     * The {pendingDefaultAdminDelay}'s effect schedule is defined in a way that waiting until the schedule and then\n     * calling {beginDefaultAdminTransfer} with the new delay will take at least the same as another {defaultAdmin}\n     * complete transfer (including acceptance).\n     *\n     * The schedule is designed for two scenarios:\n     *\n     * - When the delay is changed for a larger one the schedule is `block.timestamp + newDelay` capped by\n     * {defaultAdminDelayIncreaseWait}.\n     * - When the delay is changed for a shorter one, the schedule is `block.timestamp + (current delay - new delay)`.\n     *\n     * A {pendingDefaultAdminDelay} that never got into effect will be canceled in favor of a new scheduled change.\n     *\n     * Requirements:\n     *\n     * - Only can be called by the current {defaultAdmin}.\n     *\n     * Emits a DefaultAdminDelayChangeScheduled event and may emit a DefaultAdminDelayChangeCanceled event.\n     */\n    function changeDefaultAdminDelay(uint48 newDelay) external;\n\n    /**\n     * @dev Cancels a scheduled {defaultAdminDelay} change.\n     *\n     * Requirements:\n     *\n     * - Only can be called by the current {defaultAdmin}.\n     *\n     * May emit a DefaultAdminDelayChangeCanceled event.\n     */\n    function rollbackDefaultAdminDelay() external;\n\n    /**\n     * @dev Maximum time in seconds for an increase to {defaultAdminDelay} (that is scheduled using {changeDefaultAdminDelay})\n     * to take effect. Default to 5 days.\n     *\n     * When the {defaultAdminDelay} is scheduled to be increased, it goes into effect after the new delay has passed with\n     * the purpose of giving enough time for reverting any accidental change (i.e. using milliseconds instead of seconds)\n     * that may lock the contract. However, to avoid excessive schedules, the wait is capped by this function and it can\n     * be overrode for a custom {defaultAdminDelay} increase scheduling.\n     *\n     * IMPORTANT: Make sure to add a reasonable amount of time while overriding this value, otherwise,\n     * there's a risk of setting a high new delay that goes into effect almost immediately without the\n     * possibility of human intervention in the case of an input error (eg. set milliseconds instead of seconds).\n     */\n    function defaultAdminDelayIncreaseWait() external view returns (uint48);\n}\n",
+  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/access/IAccessControlDefaultAdminRules.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/access/IAccessControlDefaultAdminRules.sol",
+    "exportedSymbols": {
+      "IAccessControl": [
+        9184
+      ],
+      "IAccessControlDefaultAdminRules": [
+        9269
+      ]
+    },
+    "id": 9270,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 9186,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "126:23:245"
+      },
+      {
+        "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/access/IAccessControl.sol",
+        "file": "./IAccessControl.sol",
+        "id": 9187,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 9270,
+        "sourceUnit": 9185,
+        "src": "151:30:245",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 9189,
+              "name": "IAccessControl",
+              "nameLocations": [
+                "365:14:245"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 9184,
+              "src": "365:14:245"
+            },
+            "id": 9190,
+            "nodeType": "InheritanceSpecifier",
+            "src": "365:14:245"
+          }
+        ],
+        "canonicalName": "IAccessControlDefaultAdminRules",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 9188,
+          "nodeType": "StructuredDocumentation",
+          "src": "183:136:245",
+          "text": " @dev External interface of AccessControlDefaultAdminRules declared to support ERC165 detection.\n _Available since v4.9._"
+        },
+        "fullyImplemented": false,
+        "id": 9269,
+        "linearizedBaseContracts": [
+          9269,
+          9184
+        ],
+        "name": "IAccessControlDefaultAdminRules",
+        "nameLocation": "330:31:245",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 9191,
+              "nodeType": "StructuredDocumentation",
+              "src": "386:232:245",
+              "text": " @dev Emitted when a {defaultAdmin} transfer is started, setting `newAdmin` as the next\n address to become the {defaultAdmin} by calling {acceptDefaultAdminTransfer} only after `acceptSchedule`\n passes."
+            },
+            "eventSelector": "3377dc44241e779dd06afab5b788a35ca5f3b778836e2990bdb26a2a4b2e5ed6",
+            "id": 9197,
+            "name": "DefaultAdminTransferScheduled",
+            "nameLocation": "629:29:245",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9196,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9193,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "newAdmin",
+                  "nameLocation": "675:8:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9197,
+                  "src": "659:24:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9192,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "659:7:245",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9195,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "acceptSchedule",
+                  "nameLocation": "692:14:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9197,
+                  "src": "685:21:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9194,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "685:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "658:49:245"
+            },
+            "src": "623:85:245"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 9198,
+              "nodeType": "StructuredDocumentation",
+              "src": "714:123:245",
+              "text": " @dev Emitted when a {pendingDefaultAdmin} is reset if it was never accepted, regardless of its schedule."
+            },
+            "eventSelector": "8886ebfc4259abdbc16601dd8fb5678e54878f47b3c34836cfc51154a9605109",
+            "id": 9200,
+            "name": "DefaultAdminTransferCanceled",
+            "nameLocation": "848:28:245",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9199,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "876:2:245"
+            },
+            "src": "842:37:245"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 9201,
+              "nodeType": "StructuredDocumentation",
+              "src": "885:201:245",
+              "text": " @dev Emitted when a {defaultAdminDelay} change is started, setting `newDelay` as the next\n delay to be applied between default admin transfer after `effectSchedule` has passed."
+            },
+            "eventSelector": "f1038c18cf84a56e432fdbfaf746924b7ea511dfe03a6506a0ceba4888788d9b",
+            "id": 9207,
+            "name": "DefaultAdminDelayChangeScheduled",
+            "nameLocation": "1097:32:245",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9206,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9203,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "newDelay",
+                  "nameLocation": "1137:8:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9207,
+                  "src": "1130:15:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9202,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1130:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9205,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "effectSchedule",
+                  "nameLocation": "1154:14:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9207,
+                  "src": "1147:21:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9204,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1147:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1129:40:245"
+            },
+            "src": "1091:79:245"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 9208,
+              "nodeType": "StructuredDocumentation",
+              "src": "1176:103:245",
+              "text": " @dev Emitted when a {pendingDefaultAdminDelay} is reset if its schedule didn't pass."
+            },
+            "eventSelector": "2b1fa2edafe6f7b9e97c1a9e0c3660e645beb2dcaa2d45bdbf9beaf5472e1ec5",
+            "id": 9210,
+            "name": "DefaultAdminDelayChangeCanceled",
+            "nameLocation": "1290:31:245",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9209,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1321:2:245"
+            },
+            "src": "1284:40:245"
+          },
+          {
+            "documentation": {
+              "id": 9211,
+              "nodeType": "StructuredDocumentation",
+              "src": "1330:87:245",
+              "text": " @dev Returns the address of the current `DEFAULT_ADMIN_ROLE` holder."
+            },
+            "functionSelector": "84ef8ffc",
+            "id": 9216,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "defaultAdmin",
+            "nameLocation": "1431:12:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9212,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1443:2:245"
+            },
+            "returnParameters": {
+              "id": 9215,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9214,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9216,
+                  "src": "1469:7:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9213,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1469:7:245",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1468:9:245"
+            },
+            "scope": 9269,
+            "src": "1422:56:245",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9217,
+              "nodeType": "StructuredDocumentation",
+              "src": "1484:443:245",
+              "text": " @dev Returns a tuple of a `newAdmin` and an accept schedule.\n After the `schedule` passes, the `newAdmin` will be able to accept the {defaultAdmin} role\n by calling {acceptDefaultAdminTransfer}, completing the role transfer.\n A zero value only in `acceptSchedule` indicates no pending admin transfer.\n NOTE: A zero address `newAdmin` means that {defaultAdmin} is being renounced."
+            },
+            "functionSelector": "cf6eefb7",
+            "id": 9224,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pendingDefaultAdmin",
+            "nameLocation": "1941:19:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9218,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1960:2:245"
+            },
+            "returnParameters": {
+              "id": 9223,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9220,
+                  "mutability": "mutable",
+                  "name": "newAdmin",
+                  "nameLocation": "1994:8:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9224,
+                  "src": "1986:16:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9219,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1986:7:245",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9222,
+                  "mutability": "mutable",
+                  "name": "acceptSchedule",
+                  "nameLocation": "2011:14:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9224,
+                  "src": "2004:21:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9221,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2004:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1985:41:245"
+            },
+            "scope": 9269,
+            "src": "1932:95:245",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9225,
+              "nodeType": "StructuredDocumentation",
+              "src": "2033:451:245",
+              "text": " @dev Returns the delay required to schedule the acceptance of a {defaultAdmin} transfer started.\n This delay will be added to the current timestamp when calling {beginDefaultAdminTransfer} to set\n the acceptance schedule.\n NOTE: If a delay change has been scheduled, it will take effect as soon as the schedule passes, making this\n function returns the new delay. See {changeDefaultAdminDelay}."
+            },
+            "functionSelector": "cc8463c8",
+            "id": 9230,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "defaultAdminDelay",
+            "nameLocation": "2498:17:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9226,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2515:2:245"
+            },
+            "returnParameters": {
+              "id": 9229,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9228,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9230,
+                  "src": "2541:6:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9227,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2541:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2540:8:245"
+            },
+            "scope": 9269,
+            "src": "2489:60:245",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9231,
+              "nodeType": "StructuredDocumentation",
+              "src": "2555:482:245",
+              "text": " @dev Returns a tuple of `newDelay` and an effect schedule.\n After the `schedule` passes, the `newDelay` will get into effect immediately for every\n new {defaultAdmin} transfer started with {beginDefaultAdminTransfer}.\n A zero value only in `effectSchedule` indicates no pending delay change.\n NOTE: A zero value only for `newDelay` means that the next {defaultAdminDelay}\n will be zero after the effect schedule."
+            },
+            "functionSelector": "a1eda53c",
+            "id": 9238,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pendingDefaultAdminDelay",
+            "nameLocation": "3051:24:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9232,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3075:2:245"
+            },
+            "returnParameters": {
+              "id": 9237,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9234,
+                  "mutability": "mutable",
+                  "name": "newDelay",
+                  "nameLocation": "3108:8:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9238,
+                  "src": "3101:15:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9233,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3101:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9236,
+                  "mutability": "mutable",
+                  "name": "effectSchedule",
+                  "nameLocation": "3125:14:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9238,
+                  "src": "3118:21:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9235,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3118:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3100:40:245"
+            },
+            "scope": 9269,
+            "src": "3042:99:245",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9239,
+              "nodeType": "StructuredDocumentation",
+              "src": "3147:332:245",
+              "text": " @dev Starts a {defaultAdmin} transfer by setting a {pendingDefaultAdmin} scheduled for acceptance\n after the current timestamp plus a {defaultAdminDelay}.\n Requirements:\n - Only can be called by the current {defaultAdmin}.\n Emits a DefaultAdminRoleChangeStarted event."
+            },
+            "functionSelector": "634e93da",
+            "id": 9244,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "beginDefaultAdminTransfer",
+            "nameLocation": "3493:25:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9241,
+                  "mutability": "mutable",
+                  "name": "newAdmin",
+                  "nameLocation": "3527:8:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9244,
+                  "src": "3519:16:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9240,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3519:7:245",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3518:18:245"
+            },
+            "returnParameters": {
+              "id": 9243,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3545:0:245"
+            },
+            "scope": 9269,
+            "src": "3484:62:245",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9245,
+              "nodeType": "StructuredDocumentation",
+              "src": "3552:362:245",
+              "text": " @dev Cancels a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}.\n A {pendingDefaultAdmin} not yet accepted can also be cancelled with this function.\n Requirements:\n - Only can be called by the current {defaultAdmin}.\n May emit a DefaultAdminTransferCanceled event."
+            },
+            "functionSelector": "d602b9fd",
+            "id": 9248,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "cancelDefaultAdminTransfer",
+            "nameLocation": "3928:26:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9246,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3954:2:245"
+            },
+            "returnParameters": {
+              "id": 9247,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3965:0:245"
+            },
+            "scope": 9269,
+            "src": "3919:47:245",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9249,
+              "nodeType": "StructuredDocumentation",
+              "src": "3972:539:245",
+              "text": " @dev Completes a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}.\n After calling the function:\n - `DEFAULT_ADMIN_ROLE` should be granted to the caller.\n - `DEFAULT_ADMIN_ROLE` should be revoked from the previous holder.\n - {pendingDefaultAdmin} should be reset to zero values.\n Requirements:\n - Only can be called by the {pendingDefaultAdmin}'s `newAdmin`.\n - The {pendingDefaultAdmin}'s `acceptSchedule` should've passed."
+            },
+            "functionSelector": "cefc1429",
+            "id": 9252,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "acceptDefaultAdminTransfer",
+            "nameLocation": "4525:26:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9250,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4551:2:245"
+            },
+            "returnParameters": {
+              "id": 9251,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4562:0:245"
+            },
+            "scope": 9269,
+            "src": "4516:47:245",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9253,
+              "nodeType": "StructuredDocumentation",
+              "src": "4569:1410:245",
+              "text": " @dev Initiates a {defaultAdminDelay} update by setting a {pendingDefaultAdminDelay} scheduled for getting\n into effect after the current timestamp plus a {defaultAdminDelay}.\n This function guarantees that any call to {beginDefaultAdminTransfer} done between the timestamp this\n method is called and the {pendingDefaultAdminDelay} effect schedule will use the current {defaultAdminDelay}\n set before calling.\n The {pendingDefaultAdminDelay}'s effect schedule is defined in a way that waiting until the schedule and then\n calling {beginDefaultAdminTransfer} with the new delay will take at least the same as another {defaultAdmin}\n complete transfer (including acceptance).\n The schedule is designed for two scenarios:\n - When the delay is changed for a larger one the schedule is `block.timestamp + newDelay` capped by\n {defaultAdminDelayIncreaseWait}.\n - When the delay is changed for a shorter one, the schedule is `block.timestamp + (current delay - new delay)`.\n A {pendingDefaultAdminDelay} that never got into effect will be canceled in favor of a new scheduled change.\n Requirements:\n - Only can be called by the current {defaultAdmin}.\n Emits a DefaultAdminDelayChangeScheduled event and may emit a DefaultAdminDelayChangeCanceled event."
+            },
+            "functionSelector": "649a5ec7",
+            "id": 9258,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "changeDefaultAdminDelay",
+            "nameLocation": "5993:23:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9256,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9255,
+                  "mutability": "mutable",
+                  "name": "newDelay",
+                  "nameLocation": "6024:8:245",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9258,
+                  "src": "6017:15:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9254,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6017:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6016:17:245"
+            },
+            "returnParameters": {
+              "id": 9257,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6042:0:245"
+            },
+            "scope": 9269,
+            "src": "5984:59:245",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9259,
+              "nodeType": "StructuredDocumentation",
+              "src": "6049:229:245",
+              "text": " @dev Cancels a scheduled {defaultAdminDelay} change.\n Requirements:\n - Only can be called by the current {defaultAdmin}.\n May emit a DefaultAdminDelayChangeCanceled event."
+            },
+            "functionSelector": "0aa6220b",
+            "id": 9262,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "rollbackDefaultAdminDelay",
+            "nameLocation": "6292:25:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9260,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6317:2:245"
+            },
+            "returnParameters": {
+              "id": 9261,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6328:0:245"
+            },
+            "scope": 9269,
+            "src": "6283:46:245",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 9263,
+              "nodeType": "StructuredDocumentation",
+              "src": "6335:952:245",
+              "text": " @dev Maximum time in seconds for an increase to {defaultAdminDelay} (that is scheduled using {changeDefaultAdminDelay})\n to take effect. Default to 5 days.\n When the {defaultAdminDelay} is scheduled to be increased, it goes into effect after the new delay has passed with\n the purpose of giving enough time for reverting any accidental change (i.e. using milliseconds instead of seconds)\n that may lock the contract. However, to avoid excessive schedules, the wait is capped by this function and it can\n be overrode for a custom {defaultAdminDelay} increase scheduling.\n IMPORTANT: Make sure to add a reasonable amount of time while overriding this value, otherwise,\n there's a risk of setting a high new delay that goes into effect almost immediately without the\n possibility of human intervention in the case of an input error (eg. set milliseconds instead of seconds)."
+            },
+            "functionSelector": "022d63fb",
+            "id": 9268,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "defaultAdminDelayIncreaseWait",
+            "nameLocation": "7301:29:245",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9264,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "7330:2:245"
+            },
+            "returnParameters": {
+              "id": 9267,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9266,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9268,
+                  "src": "7356:6:245",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint48",
+                    "typeString": "uint48"
+                  },
+                  "typeName": {
+                    "id": 9265,
+                    "name": "uint48",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "7356:6:245",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint48",
+                      "typeString": "uint48"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "7355:8:245"
+            },
+            "scope": 9269,
+            "src": "7292:72:245",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 9270,
+        "src": "320:7046:245",
+        "usedErrors": [],
+        "usedEvents": [
+          9123,
+          9132,
+          9141,
+          9197,
+          9200,
+          9207,
+          9210
+        ]
+      }
+    ],
+    "src": "126:7241:245"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.24+commit.e11b9ed9.Linux.g++"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2025-09-14T12:28:56.070Z",
+  "devdoc": {
+    "details": "External interface of AccessControlDefaultAdminRules declared to support ERC165 detection. _Available since v4.9._",
+    "events": {
+      "DefaultAdminDelayChangeCanceled()": {
+        "details": "Emitted when a {pendingDefaultAdminDelay} is reset if its schedule didn't pass."
+      },
+      "DefaultAdminDelayChangeScheduled(uint48,uint48)": {
+        "details": "Emitted when a {defaultAdminDelay} change is started, setting `newDelay` as the next delay to be applied between default admin transfer after `effectSchedule` has passed."
+      },
+      "DefaultAdminTransferCanceled()": {
+        "details": "Emitted when a {pendingDefaultAdmin} is reset if it was never accepted, regardless of its schedule."
+      },
+      "DefaultAdminTransferScheduled(address,uint48)": {
+        "details": "Emitted when a {defaultAdmin} transfer is started, setting `newAdmin` as the next address to become the {defaultAdmin} by calling {acceptDefaultAdminTransfer} only after `acceptSchedule` passes."
+      },
+      "RoleAdminChanged(bytes32,bytes32,bytes32)": {
+        "details": "Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted signaling this. _Available since v3.1._"
+      },
+      "RoleGranted(bytes32,address,address)": {
+        "details": "Emitted when `account` is granted `role`. `sender` is the account that originated the contract call, an admin role bearer except when using {AccessControl-_setupRole}."
+      },
+      "RoleRevoked(bytes32,address,address)": {
+        "details": "Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)"
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "acceptDefaultAdminTransfer()": {
+        "details": "Completes a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}. After calling the function: - `DEFAULT_ADMIN_ROLE` should be granted to the caller. - `DEFAULT_ADMIN_ROLE` should be revoked from the previous holder. - {pendingDefaultAdmin} should be reset to zero values. Requirements: - Only can be called by the {pendingDefaultAdmin}'s `newAdmin`. - The {pendingDefaultAdmin}'s `acceptSchedule` should've passed."
+      },
+      "beginDefaultAdminTransfer(address)": {
+        "details": "Starts a {defaultAdmin} transfer by setting a {pendingDefaultAdmin} scheduled for acceptance after the current timestamp plus a {defaultAdminDelay}. Requirements: - Only can be called by the current {defaultAdmin}. Emits a DefaultAdminRoleChangeStarted event."
+      },
+      "cancelDefaultAdminTransfer()": {
+        "details": "Cancels a {defaultAdmin} transfer previously started with {beginDefaultAdminTransfer}. A {pendingDefaultAdmin} not yet accepted can also be cancelled with this function. Requirements: - Only can be called by the current {defaultAdmin}. May emit a DefaultAdminTransferCanceled event."
+      },
+      "changeDefaultAdminDelay(uint48)": {
+        "details": "Initiates a {defaultAdminDelay} update by setting a {pendingDefaultAdminDelay} scheduled for getting into effect after the current timestamp plus a {defaultAdminDelay}. This function guarantees that any call to {beginDefaultAdminTransfer} done between the timestamp this method is called and the {pendingDefaultAdminDelay} effect schedule will use the current {defaultAdminDelay} set before calling. The {pendingDefaultAdminDelay}'s effect schedule is defined in a way that waiting until the schedule and then calling {beginDefaultAdminTransfer} with the new delay will take at least the same as another {defaultAdmin} complete transfer (including acceptance). The schedule is designed for two scenarios: - When the delay is changed for a larger one the schedule is `block.timestamp + newDelay` capped by {defaultAdminDelayIncreaseWait}. - When the delay is changed for a shorter one, the schedule is `block.timestamp + (current delay - new delay)`. A {pendingDefaultAdminDelay} that never got into effect will be canceled in favor of a new scheduled change. Requirements: - Only can be called by the current {defaultAdmin}. Emits a DefaultAdminDelayChangeScheduled event and may emit a DefaultAdminDelayChangeCanceled event."
+      },
+      "defaultAdmin()": {
+        "details": "Returns the address of the current `DEFAULT_ADMIN_ROLE` holder."
+      },
+      "defaultAdminDelay()": {
+        "details": "Returns the delay required to schedule the acceptance of a {defaultAdmin} transfer started. This delay will be added to the current timestamp when calling {beginDefaultAdminTransfer} to set the acceptance schedule. NOTE: If a delay change has been scheduled, it will take effect as soon as the schedule passes, making this function returns the new delay. See {changeDefaultAdminDelay}."
+      },
+      "defaultAdminDelayIncreaseWait()": {
+        "details": "Maximum time in seconds for an increase to {defaultAdminDelay} (that is scheduled using {changeDefaultAdminDelay}) to take effect. Default to 5 days. When the {defaultAdminDelay} is scheduled to be increased, it goes into effect after the new delay has passed with the purpose of giving enough time for reverting any accidental change (i.e. using milliseconds instead of seconds) that may lock the contract. However, to avoid excessive schedules, the wait is capped by this function and it can be overrode for a custom {defaultAdminDelay} increase scheduling. IMPORTANT: Make sure to add a reasonable amount of time while overriding this value, otherwise, there's a risk of setting a high new delay that goes into effect almost immediately without the possibility of human intervention in the case of an input error (eg. set milliseconds instead of seconds)."
+      },
+      "getRoleAdmin(bytes32)": {
+        "details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {AccessControl-_setRoleAdmin}."
+      },
+      "grantRole(bytes32,address)": {
+        "details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role."
+      },
+      "hasRole(bytes32,address)": {
+        "details": "Returns `true` if `account` has been granted `role`."
+      },
+      "pendingDefaultAdmin()": {
+        "details": "Returns a tuple of a `newAdmin` and an accept schedule. After the `schedule` passes, the `newAdmin` will be able to accept the {defaultAdmin} role by calling {acceptDefaultAdminTransfer}, completing the role transfer. A zero value only in `acceptSchedule` indicates no pending admin transfer. NOTE: A zero address `newAdmin` means that {defaultAdmin} is being renounced."
+      },
+      "pendingDefaultAdminDelay()": {
+        "details": "Returns a tuple of `newDelay` and an effect schedule. After the `schedule` passes, the `newDelay` will get into effect immediately for every new {defaultAdmin} transfer started with {beginDefaultAdminTransfer}. A zero value only in `effectSchedule` indicates no pending delay change. NOTE: A zero value only for `newDelay` means that the next {defaultAdminDelay} will be zero after the effect schedule."
+      },
+      "renounceRole(bytes32,address)": {
+        "details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `account`."
+      },
+      "revokeRole(bytes32,address)": {
+        "details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role."
+      },
+      "rollbackDefaultAdminDelay()": {
+        "details": "Cancels a scheduled {defaultAdminDelay} change. Requirements: - Only can be called by the current {defaultAdmin}. May emit a DefaultAdminDelayChangeCanceled event."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
