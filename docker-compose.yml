@@ -3,7 +3,7 @@ version: '3.8'  # 兼容docker compose v2
 services:
   # MongoDB服务
   mongodb:
-    image: mongo:7.0.5  # 最新稳定版
+    image: mongo:latest
     container_name: starlink-mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
@@ -64,4 +64,3 @@ services:
 volumes:
   mongo-data:
   ipfs-data:
-    

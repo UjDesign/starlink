@@ -1,0 +1,1 @@
+{"name":"StarlinkRN","version":"0.0.1","private":true,"scripts":{"start":"node node_modules/react-native/local-cli/cli.js start"},"dependencies":{"@walletconnect/react-native":"^1.0.0","@walletconnect/sign-client":"^2.21.8","axios":"^1.12.1","ethers":"^5.7.2","react-native":"0.81.4","ws":"^8.18.3"},"devDependencies":{"react-native-dotenv":"^3.4.11"}}

@@ -1,0 +1,2517 @@
+{
+  "contractName": "IOutbox",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "l2Sender",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "zero",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "transactionIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "OutBoxTransactionExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "blockHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "outputRoot",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SendRootUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "rollup",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "bridge",
+      "outputs": [
+        {
+          "internalType": "contract IBridge",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "spent",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "roots",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "OUTBOX_VERSION",
+      "outputs": [
+        {
+          "internalType": "uint128",
+          "name": "",
+          "type": "uint128"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "sendRoot",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "l2BlockHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateSendRoot",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "l2ToL1Sender",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "l2ToL1Block",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "l2ToL1EthBlock",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "l2ToL1Timestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "l2ToL1OutputId",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "proof",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "l2Sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l2Block",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l1Block",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l2Timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "executeTransaction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "l2Sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l2Block",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l1Block",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l2Timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "executeTransactionSimulation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "isSpent",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "l2Sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l2Block",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l1Block",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "l2Timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "calculateItemHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "proof",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "path",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "item",
+          "type": "bytes32"
+        }
+      ],
+      "name": "calculateMerkleRoot",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"l2Sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"zero\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"transactionIndex\",\"type\":\"uint256\"}],\"name\":\"OutBoxTransactionExecuted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"blockHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"outputRoot\",\"type\":\"bytes32\"}],\"name\":\"SendRootUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"OUTBOX_VERSION\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"bridge\",\"outputs\":[{\"internalType\":\"contract IBridge\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"l2Sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"l2Block\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"l1Block\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"l2Timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"calculateItemHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"proof\",\"type\":\"bytes32[]\"},{\"internalType\":\"uint256\",\"name\":\"path\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"item\",\"type\":\"bytes32\"}],\"name\":\"calculateMerkleRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"proof\",\"type\":\"bytes32[]\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"l2Sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"l2Block\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"l1Block\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"l2Timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"executeTransaction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"l2Sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"l2Block\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"l1Block\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"l2Timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"executeTransactionSimulation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l2ToL1Block\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l2ToL1EthBlock\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l2ToL1OutputId\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l2ToL1Sender\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"l2ToL1Timestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rollup\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"spent\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sendRoot\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"l2BlockHash\",\"type\":\"bytes32\"}],\"name\":\"updateSendRoot\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"executeTransaction(bytes32[],uint256,address,address,uint256,uint256,uint256,uint256,bytes)\":{\"details\":\"Reverts if dispute period hasn't expired, since the outbox entry      is only created once the rollup confirms the respective assertion.it is not possible to execute any L2-to-L1 transaction which contains data      to a contract address without any code (as enforced by the Bridge contract).\",\"params\":{\"data\":\"abi-encoded L1 message data\",\"index\":\"Merkle path to message\",\"l1Block\":\"l1 block number at which sendTxToL1 call was made\",\"l2Block\":\"l2 block number at which sendTxToL1 call was made\",\"l2Sender\":\"sender if original message (i.e., caller of ArbSys.sendTxToL1)\",\"l2Timestamp\":\"l2 Timestamp at which sendTxToL1 call was made\",\"proof\":\"Merkle proof of message inclusion in send root\",\"to\":\"destination address for L1 contract call\",\"value\":\"wei in L1 message\"}},\"executeTransactionSimulation(uint256,address,address,uint256,uint256,uint256,uint256,bytes)\":{\"details\":\"function used to simulate the result of a particular function call from the outbox       it is useful for things such as gas estimates. This function includes all costs except for       proof validation (which can be considered offchain as a somewhat of a fixed cost - it's       not really a fixed cost, but can be treated as so with a fixed overhead for gas estimation).       We can't include the cost of proof validation since this is intended to be used to simulate txs       that are included in yet-to-be confirmed merkle roots. The simulation entrypoint could instead pretend       to confirm a pending merkle root, but that would be less practical for integrating with tooling.       It is only possible to trigger it when the msg sender is address zero, which should be impossible       unless under simulation in an eth_call or eth_estimateGas\"},\"isSpent(uint256)\":{\"params\":{\"index\":\"Merkle path to message\"},\"returns\":{\"_0\":\"true if the message has been spent\"}},\"l2ToL1Block()\":{\"returns\":{\"_0\":\"l2Block return L2 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active\"}},\"l2ToL1EthBlock()\":{\"returns\":{\"_0\":\"l1Block return L1 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active\"}},\"l2ToL1OutputId()\":{\"returns\":{\"_0\":\"outputId returns the unique output identifier of the L2 to L1 tx or 0 if no L2 to L1 transaction is active\"}},\"l2ToL1Sender()\":{\"details\":\"the l2ToL1Sender behaves as the tx.origin, the msg.sender should be validated to protect against reentrancies\"},\"l2ToL1Timestamp()\":{\"returns\":{\"_0\":\"timestamp return L2 timestamp when the L2 tx was initiated or 0 if no L2 to L1 transaction is active\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"executeTransaction(bytes32[],uint256,address,address,uint256,uint256,uint256,uint256,bytes)\":{\"notice\":\"Executes a messages in an Outbox entry.\"},\"l2ToL1Sender()\":{\"notice\":\"When l2ToL1Sender returns a nonzero address, the message was originated by an L2 account         When the return value is zero, that means this is a system message\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IOutbox.sol\":\"IOutbox\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IBridge.sol\":{\"keccak256\":\"0xe1e854715c581bfa526f35e4f76579f6b66dc0799d3221c530ded139c3370807\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://91e16564ebee6c34ef04f0567ccc726f5c3750a85de9f18eb678e768be68ff1f\",\"dweb:/ipfs/QmRXx3S9XqXGnbcF65VyxSUC4LsWn2TQdQqN7ZCfDSeMUf\"]},\"project:/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IOutbox.sol\":{\"keccak256\":\"0xc5d2fb7ff695fe2e1057fa75ff6f299e5c347c64a2ea75946a72e8977908a199\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://116d31a4534da140e75b06f1e2bc62a64c0dd1b99781dbb7beda44efe89c4fd5\",\"dweb:/ipfs/QmWnUzPoWcZThzwdnc9J3Bt4Gg6ZMtq8mUSEG1VQSsG8Zx\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// Copyright 2021-2022, Offchain Labs, Inc.\n// For license information, see https://github.com/nitro/blob/master/LICENSE\n// SPDX-License-Identifier: BUSL-1.1\n// OpenZeppelin Contracts (last updated v4.9.0) (vendor/arbitrum/IOutbox.sol)\n\n// solhint-disable-next-line compiler-version\npragma solidity >=0.6.9 <0.9.0;\n\nimport \"./IBridge.sol\";\n\ninterface IOutbox {\n    event SendRootUpdated(bytes32 indexed blockHash, bytes32 indexed outputRoot);\n    event OutBoxTransactionExecuted(\n        address indexed to,\n        address indexed l2Sender,\n        uint256 indexed zero,\n        uint256 transactionIndex\n    );\n\n    function rollup() external view returns (address); // the rollup contract\n\n    function bridge() external view returns (IBridge); // the bridge contract\n\n    function spent(uint256) external view returns (bytes32); // packed spent bitmap\n\n    function roots(bytes32) external view returns (bytes32); // maps root hashes => L2 block hash\n\n    // solhint-disable-next-line func-name-mixedcase\n    function OUTBOX_VERSION() external view returns (uint128); // the outbox version\n\n    function updateSendRoot(bytes32 sendRoot, bytes32 l2BlockHash) external;\n\n    /// @notice When l2ToL1Sender returns a nonzero address, the message was originated by an L2 account\n    ///         When the return value is zero, that means this is a system message\n    /// @dev the l2ToL1Sender behaves as the tx.origin, the msg.sender should be validated to protect against reentrancies\n    function l2ToL1Sender() external view returns (address);\n\n    /// @return l2Block return L2 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active\n    function l2ToL1Block() external view returns (uint256);\n\n    /// @return l1Block return L1 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active\n    function l2ToL1EthBlock() external view returns (uint256);\n\n    /// @return timestamp return L2 timestamp when the L2 tx was initiated or 0 if no L2 to L1 transaction is active\n    function l2ToL1Timestamp() external view returns (uint256);\n\n    /// @return outputId returns the unique output identifier of the L2 to L1 tx or 0 if no L2 to L1 transaction is active\n    function l2ToL1OutputId() external view returns (bytes32);\n\n    /**\n     * @notice Executes a messages in an Outbox entry.\n     * @dev Reverts if dispute period hasn't expired, since the outbox entry\n     *      is only created once the rollup confirms the respective assertion.\n     * @dev it is not possible to execute any L2-to-L1 transaction which contains data\n     *      to a contract address without any code (as enforced by the Bridge contract).\n     * @param proof Merkle proof of message inclusion in send root\n     * @param index Merkle path to message\n     * @param l2Sender sender if original message (i.e., caller of ArbSys.sendTxToL1)\n     * @param to destination address for L1 contract call\n     * @param l2Block l2 block number at which sendTxToL1 call was made\n     * @param l1Block l1 block number at which sendTxToL1 call was made\n     * @param l2Timestamp l2 Timestamp at which sendTxToL1 call was made\n     * @param value wei in L1 message\n     * @param data abi-encoded L1 message data\n     */\n    function executeTransaction(\n        bytes32[] calldata proof,\n        uint256 index,\n        address l2Sender,\n        address to,\n        uint256 l2Block,\n        uint256 l1Block,\n        uint256 l2Timestamp,\n        uint256 value,\n        bytes calldata data\n    ) external;\n\n    /**\n     *  @dev function used to simulate the result of a particular function call from the outbox\n     *       it is useful for things such as gas estimates. This function includes all costs except for\n     *       proof validation (which can be considered offchain as a somewhat of a fixed cost - it's\n     *       not really a fixed cost, but can be treated as so with a fixed overhead for gas estimation).\n     *       We can't include the cost of proof validation since this is intended to be used to simulate txs\n     *       that are included in yet-to-be confirmed merkle roots. The simulation entrypoint could instead pretend\n     *       to confirm a pending merkle root, but that would be less practical for integrating with tooling.\n     *       It is only possible to trigger it when the msg sender is address zero, which should be impossible\n     *       unless under simulation in an eth_call or eth_estimateGas\n     */\n    function executeTransactionSimulation(\n        uint256 index,\n        address l2Sender,\n        address to,\n        uint256 l2Block,\n        uint256 l1Block,\n        uint256 l2Timestamp,\n        uint256 value,\n        bytes calldata data\n    ) external;\n\n    /**\n     * @param index Merkle path to message\n     * @return true if the message has been spent\n     */\n    function isSpent(uint256 index) external view returns (bool);\n\n    function calculateItemHash(\n        address l2Sender,\n        address to,\n        uint256 l2Block,\n        uint256 l1Block,\n        uint256 l2Timestamp,\n        uint256 value,\n        bytes calldata data\n    ) external pure returns (bytes32);\n\n    function calculateMerkleRoot(bytes32[] memory proof, uint256 path, bytes32 item) external pure returns (bytes32);\n}\n",
+  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IOutbox.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IOutbox.sol",
+    "exportedSymbols": {
+      "IBridge": [
+        40758
+      ],
+      "IOutbox": [
+        41119
+      ]
+    },
+    "id": 41120,
+    "license": "BUSL-1.1",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 40952,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.6",
+          ".9",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "283:31:590"
+      },
+      {
+        "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IBridge.sol",
+        "file": "./IBridge.sol",
+        "id": 40953,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 41120,
+        "sourceUnit": 40759,
+        "src": "316:23:590",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IOutbox",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 41119,
+        "linearizedBaseContracts": [
+          41119
+        ],
+        "name": "IOutbox",
+        "nameLocation": "351:7:590",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "eventSelector": "b4df3847300f076a369cd76d2314b470a1194d9e8a6bb97f1860aee88a5f6748",
+            "id": 40959,
+            "name": "SendRootUpdated",
+            "nameLocation": "371:15:590",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 40958,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40955,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "blockHash",
+                  "nameLocation": "403:9:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40959,
+                  "src": "387:25:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 40954,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "387:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40957,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "outputRoot",
+                  "nameLocation": "430:10:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40959,
+                  "src": "414:26:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 40956,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "414:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "386:55:590"
+            },
+            "src": "365:77:590"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "20af7f3bbfe38132b8900ae295cd9c8d1914be7052d061a511f3f728dab18964",
+            "id": 40969,
+            "name": "OutBoxTransactionExecuted",
+            "nameLocation": "453:25:590",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 40968,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40961,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "504:2:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40969,
+                  "src": "488:18:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40960,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "488:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40963,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "l2Sender",
+                  "nameLocation": "532:8:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40969,
+                  "src": "516:24:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40962,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "516:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40965,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "zero",
+                  "nameLocation": "566:4:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40969,
+                  "src": "550:20:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40964,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "550:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40967,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "transactionIndex",
+                  "nameLocation": "588:16:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40969,
+                  "src": "580:24:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40966,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "580:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "478:132:590"
+            },
+            "src": "447:164:590"
+          },
+          {
+            "functionSelector": "cb23bcb5",
+            "id": 40974,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "rollup",
+            "nameLocation": "626:6:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 40970,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "632:2:590"
+            },
+            "returnParameters": {
+              "id": 40973,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40972,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40974,
+                  "src": "658:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40971,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "658:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "657:9:590"
+            },
+            "scope": 41119,
+            "src": "617:50:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "e78cea92",
+            "id": 40980,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "bridge",
+            "nameLocation": "705:6:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 40975,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "711:2:590"
+            },
+            "returnParameters": {
+              "id": 40979,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40978,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40980,
+                  "src": "737:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IBridge_$40758",
+                    "typeString": "contract IBridge"
+                  },
+                  "typeName": {
+                    "id": 40977,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 40976,
+                      "name": "IBridge",
+                      "nameLocations": [
+                        "737:7:590"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 40758,
+                      "src": "737:7:590"
+                    },
+                    "referencedDeclaration": 40758,
+                    "src": "737:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IBridge_$40758",
+                      "typeString": "contract IBridge"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "736:9:590"
+            },
+            "scope": 41119,
+            "src": "696:50:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "d5b5cc23",
+            "id": 40987,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "spent",
+            "nameLocation": "784:5:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 40983,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40982,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40987,
+                  "src": "790:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40981,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "790:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "789:9:590"
+            },
+            "returnParameters": {
+              "id": 40986,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40985,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40987,
+                  "src": "822:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 40984,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "822:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "821:9:590"
+            },
+            "scope": 41119,
+            "src": "775:56:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "ae6dead7",
+            "id": 40994,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "roots",
+            "nameLocation": "869:5:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 40990,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40989,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40994,
+                  "src": "875:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 40988,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "875:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "874:9:590"
+            },
+            "returnParameters": {
+              "id": 40993,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40992,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40994,
+                  "src": "907:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 40991,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "907:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "906:9:590"
+            },
+            "scope": 41119,
+            "src": "860:56:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "c75184df",
+            "id": 40999,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "OUTBOX_VERSION",
+            "nameLocation": "1021:14:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 40995,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1035:2:590"
+            },
+            "returnParameters": {
+              "id": 40998,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40997,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40999,
+                  "src": "1061:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint128",
+                    "typeString": "uint128"
+                  },
+                  "typeName": {
+                    "id": 40996,
+                    "name": "uint128",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1061:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint128",
+                      "typeString": "uint128"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1060:9:590"
+            },
+            "scope": 41119,
+            "src": "1012:58:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "a04cee60",
+            "id": 41006,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateSendRoot",
+            "nameLocation": "1107:14:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41004,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41001,
+                  "mutability": "mutable",
+                  "name": "sendRoot",
+                  "nameLocation": "1130:8:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41006,
+                  "src": "1122:16:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 41000,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1122:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41003,
+                  "mutability": "mutable",
+                  "name": "l2BlockHash",
+                  "nameLocation": "1148:11:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41006,
+                  "src": "1140:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 41002,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1140:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1121:39:590"
+            },
+            "returnParameters": {
+              "id": 41005,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1169:0:590"
+            },
+            "scope": 41119,
+            "src": "1098:72:590",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41007,
+              "nodeType": "StructuredDocumentation",
+              "src": "1176:306:590",
+              "text": "@notice When l2ToL1Sender returns a nonzero address, the message was originated by an L2 account\n         When the return value is zero, that means this is a system message\n @dev the l2ToL1Sender behaves as the tx.origin, the msg.sender should be validated to protect against reentrancies"
+            },
+            "functionSelector": "80648b02",
+            "id": 41012,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "l2ToL1Sender",
+            "nameLocation": "1496:12:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41008,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1508:2:590"
+            },
+            "returnParameters": {
+              "id": 41011,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41010,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41012,
+                  "src": "1534:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41009,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1534:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1533:9:590"
+            },
+            "scope": 41119,
+            "src": "1487:56:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41013,
+              "nodeType": "StructuredDocumentation",
+              "src": "1549:106:590",
+              "text": "@return l2Block return L2 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active"
+            },
+            "functionSelector": "46547790",
+            "id": 41018,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "l2ToL1Block",
+            "nameLocation": "1669:11:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41014,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1680:2:590"
+            },
+            "returnParameters": {
+              "id": 41017,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41016,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41018,
+                  "src": "1706:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41015,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1706:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1705:9:590"
+            },
+            "scope": 41119,
+            "src": "1660:55:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41019,
+              "nodeType": "StructuredDocumentation",
+              "src": "1721:106:590",
+              "text": "@return l1Block return L1 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active"
+            },
+            "functionSelector": "8515bc6a",
+            "id": 41024,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "l2ToL1EthBlock",
+            "nameLocation": "1841:14:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41020,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1855:2:590"
+            },
+            "returnParameters": {
+              "id": 41023,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41022,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41024,
+                  "src": "1881:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41021,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1881:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1880:9:590"
+            },
+            "scope": 41119,
+            "src": "1832:58:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41025,
+              "nodeType": "StructuredDocumentation",
+              "src": "1896:112:590",
+              "text": "@return timestamp return L2 timestamp when the L2 tx was initiated or 0 if no L2 to L1 transaction is active"
+            },
+            "functionSelector": "b0f30537",
+            "id": 41030,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "l2ToL1Timestamp",
+            "nameLocation": "2022:15:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41026,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2037:2:590"
+            },
+            "returnParameters": {
+              "id": 41029,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41028,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41030,
+                  "src": "2063:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41027,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2063:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2062:9:590"
+            },
+            "scope": 41119,
+            "src": "2013:59:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41031,
+              "nodeType": "StructuredDocumentation",
+              "src": "2078:118:590",
+              "text": "@return outputId returns the unique output identifier of the L2 to L1 tx or 0 if no L2 to L1 transaction is active"
+            },
+            "functionSelector": "72f2a8c7",
+            "id": 41036,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "l2ToL1OutputId",
+            "nameLocation": "2210:14:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41032,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2224:2:590"
+            },
+            "returnParameters": {
+              "id": 41035,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41034,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41036,
+                  "src": "2250:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 41033,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2250:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2249:9:590"
+            },
+            "scope": 41119,
+            "src": "2201:58:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41037,
+              "nodeType": "StructuredDocumentation",
+              "src": "2265:954:590",
+              "text": " @notice Executes a messages in an Outbox entry.\n @dev Reverts if dispute period hasn't expired, since the outbox entry\n      is only created once the rollup confirms the respective assertion.\n @dev it is not possible to execute any L2-to-L1 transaction which contains data\n      to a contract address without any code (as enforced by the Bridge contract).\n @param proof Merkle proof of message inclusion in send root\n @param index Merkle path to message\n @param l2Sender sender if original message (i.e., caller of ArbSys.sendTxToL1)\n @param to destination address for L1 contract call\n @param l2Block l2 block number at which sendTxToL1 call was made\n @param l1Block l1 block number at which sendTxToL1 call was made\n @param l2Timestamp l2 Timestamp at which sendTxToL1 call was made\n @param value wei in L1 message\n @param data abi-encoded L1 message data"
+            },
+            "functionSelector": "08635a95",
+            "id": 41059,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "executeTransaction",
+            "nameLocation": "3233:18:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41057,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41040,
+                  "mutability": "mutable",
+                  "name": "proof",
+                  "nameLocation": "3280:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3261:24:590",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_calldata_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 41038,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3261:7:590",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 41039,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3261:9:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41042,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "3303:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3295:13:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41041,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3295:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41044,
+                  "mutability": "mutable",
+                  "name": "l2Sender",
+                  "nameLocation": "3326:8:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3318:16:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41043,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3318:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41046,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "3352:2:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3344:10:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41045,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3344:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41048,
+                  "mutability": "mutable",
+                  "name": "l2Block",
+                  "nameLocation": "3372:7:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3364:15:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41047,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3364:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41050,
+                  "mutability": "mutable",
+                  "name": "l1Block",
+                  "nameLocation": "3397:7:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3389:15:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41049,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3389:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41052,
+                  "mutability": "mutable",
+                  "name": "l2Timestamp",
+                  "nameLocation": "3422:11:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3414:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41051,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3414:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41054,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "3451:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3443:13:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41053,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3443:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41056,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "3481:4:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41059,
+                  "src": "3466:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 41055,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3466:5:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3251:240:590"
+            },
+            "returnParameters": {
+              "id": 41058,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3500:0:590"
+            },
+            "scope": 41119,
+            "src": "3224:277:590",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41060,
+              "nodeType": "StructuredDocumentation",
+              "src": "3507:935:590",
+              "text": "  @dev function used to simulate the result of a particular function call from the outbox\n       it is useful for things such as gas estimates. This function includes all costs except for\n       proof validation (which can be considered offchain as a somewhat of a fixed cost - it's\n       not really a fixed cost, but can be treated as so with a fixed overhead for gas estimation).\n       We can't include the cost of proof validation since this is intended to be used to simulate txs\n       that are included in yet-to-be confirmed merkle roots. The simulation entrypoint could instead pretend\n       to confirm a pending merkle root, but that would be less practical for integrating with tooling.\n       It is only possible to trigger it when the msg sender is address zero, which should be impossible\n       unless under simulation in an eth_call or eth_estimateGas"
+            },
+            "functionSelector": "288e5b10",
+            "id": 41079,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "executeTransactionSimulation",
+            "nameLocation": "4456:28:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41077,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41062,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "4502:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4494:13:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41061,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4494:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41064,
+                  "mutability": "mutable",
+                  "name": "l2Sender",
+                  "nameLocation": "4525:8:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4517:16:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41063,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4517:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41066,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "4551:2:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4543:10:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41065,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4543:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41068,
+                  "mutability": "mutable",
+                  "name": "l2Block",
+                  "nameLocation": "4571:7:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4563:15:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41067,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4563:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41070,
+                  "mutability": "mutable",
+                  "name": "l1Block",
+                  "nameLocation": "4596:7:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4588:15:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41069,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4588:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41072,
+                  "mutability": "mutable",
+                  "name": "l2Timestamp",
+                  "nameLocation": "4621:11:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4613:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41071,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4613:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41074,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "4650:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4642:13:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41073,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4642:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41076,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "4680:4:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41079,
+                  "src": "4665:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 41075,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4665:5:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4484:206:590"
+            },
+            "returnParameters": {
+              "id": 41078,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4699:0:590"
+            },
+            "scope": 41119,
+            "src": "4447:253:590",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 41080,
+              "nodeType": "StructuredDocumentation",
+              "src": "4706:104:590",
+              "text": " @param index Merkle path to message\n @return true if the message has been spent"
+            },
+            "functionSelector": "5a129efe",
+            "id": 41087,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isSpent",
+            "nameLocation": "4824:7:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41083,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41082,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "4840:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41087,
+                  "src": "4832:13:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41081,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4832:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4831:15:590"
+            },
+            "returnParameters": {
+              "id": 41086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41085,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41087,
+                  "src": "4870:4:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 41084,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4870:4:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4869:6:590"
+            },
+            "scope": 41119,
+            "src": "4815:61:590",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "9f0c04bf",
+            "id": 41106,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "calculateItemHash",
+            "nameLocation": "4891:17:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41102,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41089,
+                  "mutability": "mutable",
+                  "name": "l2Sender",
+                  "nameLocation": "4926:8:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "4918:16:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41088,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4918:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41091,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "4952:2:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "4944:10:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 41090,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4944:7:590",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41093,
+                  "mutability": "mutable",
+                  "name": "l2Block",
+                  "nameLocation": "4972:7:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "4964:15:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41092,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4964:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41095,
+                  "mutability": "mutable",
+                  "name": "l1Block",
+                  "nameLocation": "4997:7:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "4989:15:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41094,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4989:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41097,
+                  "mutability": "mutable",
+                  "name": "l2Timestamp",
+                  "nameLocation": "5022:11:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "5014:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41096,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5014:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41099,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "5051:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "5043:13:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41098,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5043:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41101,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "5081:4:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "5066:19:590",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 41100,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5066:5:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4908:183:590"
+            },
+            "returnParameters": {
+              "id": 41105,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41104,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41106,
+                  "src": "5115:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 41103,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5115:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5114:9:590"
+            },
+            "scope": 41119,
+            "src": "4882:242:590",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "007436d3",
+            "id": 41118,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "calculateMerkleRoot",
+            "nameLocation": "5139:19:590",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 41114,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41109,
+                  "mutability": "mutable",
+                  "name": "proof",
+                  "nameLocation": "5176:5:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41118,
+                  "src": "5159:22:590",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 41107,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "5159:7:590",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 41108,
+                    "nodeType": "ArrayTypeName",
+                    "src": "5159:9:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41111,
+                  "mutability": "mutable",
+                  "name": "path",
+                  "nameLocation": "5191:4:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41118,
+                  "src": "5183:12:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 41110,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5183:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41113,
+                  "mutability": "mutable",
+                  "name": "item",
+                  "nameLocation": "5205:4:590",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41118,
+                  "src": "5197:12:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 41112,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5197:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5158:52:590"
+            },
+            "returnParameters": {
+              "id": 41117,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 41116,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 41118,
+                  "src": "5234:7:590",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 41115,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5234:7:590",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5233:9:590"
+            },
+            "scope": 41119,
+            "src": "5130:113:590",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 41120,
+        "src": "341:4904:590",
+        "usedErrors": [],
+        "usedEvents": [
+          40959,
+          40969
+        ]
+      }
+    ],
+    "src": "283:4963:590"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.24+commit.e11b9ed9.Linux.g++"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2025-09-14T12:28:56.156Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "executeTransaction(bytes32[],uint256,address,address,uint256,uint256,uint256,uint256,bytes)": {
+        "details": "Reverts if dispute period hasn't expired, since the outbox entry      is only created once the rollup confirms the respective assertion.it is not possible to execute any L2-to-L1 transaction which contains data      to a contract address without any code (as enforced by the Bridge contract).",
+        "params": {
+          "data": "abi-encoded L1 message data",
+          "index": "Merkle path to message",
+          "l1Block": "l1 block number at which sendTxToL1 call was made",
+          "l2Block": "l2 block number at which sendTxToL1 call was made",
+          "l2Sender": "sender if original message (i.e., caller of ArbSys.sendTxToL1)",
+          "l2Timestamp": "l2 Timestamp at which sendTxToL1 call was made",
+          "proof": "Merkle proof of message inclusion in send root",
+          "to": "destination address for L1 contract call",
+          "value": "wei in L1 message"
+        }
+      },
+      "executeTransactionSimulation(uint256,address,address,uint256,uint256,uint256,uint256,bytes)": {
+        "details": "function used to simulate the result of a particular function call from the outbox       it is useful for things such as gas estimates. This function includes all costs except for       proof validation (which can be considered offchain as a somewhat of a fixed cost - it's       not really a fixed cost, but can be treated as so with a fixed overhead for gas estimation).       We can't include the cost of proof validation since this is intended to be used to simulate txs       that are included in yet-to-be confirmed merkle roots. The simulation entrypoint could instead pretend       to confirm a pending merkle root, but that would be less practical for integrating with tooling.       It is only possible to trigger it when the msg sender is address zero, which should be impossible       unless under simulation in an eth_call or eth_estimateGas"
+      },
+      "isSpent(uint256)": {
+        "params": {
+          "index": "Merkle path to message"
+        },
+        "returns": {
+          "_0": "true if the message has been spent"
+        }
+      },
+      "l2ToL1Block()": {
+        "returns": {
+          "_0": "l2Block return L2 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active"
+        }
+      },
+      "l2ToL1EthBlock()": {
+        "returns": {
+          "_0": "l1Block return L1 block when the L2 tx was initiated or 0 if no L2 to L1 transaction is active"
+        }
+      },
+      "l2ToL1OutputId()": {
+        "returns": {
+          "_0": "outputId returns the unique output identifier of the L2 to L1 tx or 0 if no L2 to L1 transaction is active"
+        }
+      },
+      "l2ToL1Sender()": {
+        "details": "the l2ToL1Sender behaves as the tx.origin, the msg.sender should be validated to protect against reentrancies"
+      },
+      "l2ToL1Timestamp()": {
+        "returns": {
+          "_0": "timestamp return L2 timestamp when the L2 tx was initiated or 0 if no L2 to L1 transaction is active"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "executeTransaction(bytes32[],uint256,address,address,uint256,uint256,uint256,uint256,bytes)": {
+        "notice": "Executes a messages in an Outbox entry."
+      },
+      "l2ToL1Sender()": {
+        "notice": "When l2ToL1Sender returns a nonzero address, the message was originated by an L2 account         When the return value is zero, that means this is a system message"
+      }
+    },
+    "version": 1
+  }
+}
