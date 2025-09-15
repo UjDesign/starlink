@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
-import { 
-  View, Text, TextInput, TouchableOpacity, StyleSheet, 
-  FlatList, Image, Video, SafeAreaView, ScrollView, 
-  Alert, ActivityIndicator, KeyboardAvoidingView 
+import {
+  View, Text, TextInput, TouchableOpacity, StyleSheet,
+  FlatList, Image, Video, SafeAreaView, ScrollView,
+  Alert, ActivityIndicator, KeyboardAvoidingView
 } from 'react-native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import * as ImagePicker from 'expo-image-picker';
@@ -31,14 +32,14 @@ const VideoCard = ({ item, onLike, onReport, userId }) => {
           Creator: {item.creator.walletAddress.substring(0, 6)}...
         </Text>
         <View style={styles.videoActions}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.actionButton}
             onPress={() => onLike(item._id, userId)}
           >
             <FontAwesome name="thumbs-up" size={20} color="#3498db" />
             <Text style={styles.actionText}>{item.likes}</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.actionButton}
             onPress={() => onReport(item._id, userId)}
           >
@@ -86,17 +87,17 @@ const HomeScreen = ({ route, navigation }) => {
         contentId,
         userId
       });
-      
+
       // 更新本地状态
-      setContents(contents.map(content => 
-        content._id === contentId 
-          ? { ...content, likes: response.data.likes } 
+      setContents(contents.map(content =>
+        content._id === contentId
+          ? { ...content, likes: response.data.likes }
           : content
       ));
-      
+
       // 更新导航栏的STAR余额
-      navigation.setParams({ 
-        starBalance: response.data.starBalance 
+      navigation.setParams({
+        starBalance: response.data.starBalance
       });
     } catch (error) {
       console.error('Error liking content:', error);
@@ -119,18 +120,18 @@ const HomeScreen = ({ route, navigation }) => {
           'Copyright infringement, harassment, etc.'
         );
       });
-      
+
       if (!reason) return;
-      
+
       await axios.post(`${API_URL}/report-content`, {
         contentId,
         userId,
         reason,
         evidence: ''
       });
-      
+
       Alert.alert('Success', 'Content reported successfully');
-      
+
       // 从列表中移除已举报内容
       setContents(contents.filter(content => content._id !== contentId));
     } catch (error) {
@@ -153,9 +154,9 @@ const HomeScreen = ({ route, navigation }) => {
       <FlatList
         data={contents}
         renderItem={({ item }) => (
-          <VideoCard 
-            item={item} 
-            onLike={handleLike} 
+          <VideoCard
+            item={item}
+            onLike={handleLike}
             onReport={handleReport}
             userId={userId}
           />
@@ -209,7 +210,7 @@ const UploadScreen = ({ route, navigation }) => {
 
     try {
       setLoading(true);
-      
+
       // 准备表单数据
       const formData = new FormData();
       formData.append('video', {
@@ -231,18 +232,18 @@ const UploadScreen = ({ route, navigation }) => {
       });
 
       Alert.alert('Success', 'Content uploaded successfully as NFT!');
-      
+
       // 重置表单
       setTitle('');
       setDescription('');
       setTags('');
       setVideoUri(null);
-      
+
       // 更新STAR余额
-      navigation.setParams({ 
-        starBalance: response.data.starBalance 
+      navigation.setParams({
+        starBalance: response.data.starBalance
       });
-      
+
       // 返回首页
       navigation.navigate('Home');
     } catch (error) {
@@ -256,7 +257,7 @@ const UploadScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.uploadForm}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.videoPicker}
           onPress={pickVideo}
         >
@@ -345,7 +346,7 @@ const ProfileScreen = ({ route }) => {
           Balance: {starBalance} STAR
         </Text>
       </View>
-      
+
       <View style={styles.profileSection}>
         <Text style={styles.sectionTitle}>My Content NFTs</Text>
         <View style={styles.emptyState}>
@@ -353,7 +354,7 @@ const ProfileScreen = ({ route }) => {
           <Text style={styles.emptyText}>You haven't created any content yet</Text>
         </View>
       </View>
-      
+
       <View style={styles.profileSection}>
         <Text style={styles.sectionTitle}>Staked Content</Text>
         <View style={styles.emptyState}>
@@ -474,15 +475,15 @@ const MainTabs = () => {
         ),
       })}
     >
-      <Tab.Screen 
-        name="Home" 
-        component={HomeScreen} 
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
         listeners={({ navigation, route }) => ({
           focus: () => navigation.setParams({ starBalance }),
         })}
       />
-      <Tab.Screen 
-        name="Upload" 
+      <Tab.Screen
+        name="Upload"
         component={UploadScreen}
         listeners={({ navigation }) => ({
           focus: () => navigation.setParams({ starBalance }),
@@ -749,4 +750,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-    

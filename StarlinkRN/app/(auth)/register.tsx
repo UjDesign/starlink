@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import axios from 'axios';
-import { useRouter } from 'expo-router';
-import { API_URL } from '@env';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { Link } from 'expo-router';
+import { useAuth } from '@/hooks/useAuth';
 
 const RegisterScreen: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const router = useRouter();
+  const { register, isLoading } = useAuth();
 
   const handleRegister = async () => {
     try {
-      await axios.post(`${API_URL}/register`, {
-        name,
-        email,
-        password,
-      });
-      router.push('/login');
+      await register(name, email, password);
     } catch (error) {
-      console.error(error);
+      Alert.alert('Registration Failed', error.message || 'Please try again');
     }
   };
 
@@ -47,10 +41,13 @@ const RegisterScreen: React.FC = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Register" onPress={handleRegister} />
-      <Text style={styles.footerText}>
-        Already have an account? Login here.
-      </Text>
+      <Button title={isLoading ? "Registering..." : "Register"} onPress={handleRegister} disabled={isLoading} />
+      <View style={styles.footer}>
+        <Text>Already have an account? </Text>
+        <Link href="/(auth)/login">
+          <Text style={styles.link}>Login here</Text>
+        </Link>
+      </View>
     </View>
   );
 };
@@ -75,9 +72,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 16,
   },
-  footerText: {
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 16,
-    textAlign: 'center',
+  },
+  link: {
+    color: '#007bff',
+    fontWeight: 'bold',
   },
 });
 

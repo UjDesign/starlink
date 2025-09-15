@@ -1032,7 +1032,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.9.0) (governance/extensions/GovernorVotes.sol)\n\npragma solidity ^0.8.0;\n\nimport \"../Governor.sol\";\nimport \"../../interfaces/IERC5805.sol\";\n\n/**\n * @dev Extension of {Governor} for voting weight extraction from an {ERC20Votes} token, or since v4.5 an {ERC721Votes} token.\n *\n * _Available since v4.3._\n */\nabstract contract GovernorVotes is Governor {\n    IERC5805 public immutable token;\n\n    constructor(IVotes tokenAddress) {\n        token = IERC5805(address(tokenAddress));\n    }\n\n    /**\n     * @dev Clock (as specified in EIP-6372) is set to match the token's clock. Fallback to block numbers if the token\n     * does not implement EIP-6372.\n     */\n    function clock() public view virtual override returns (uint48) {\n        try token.clock() returns (uint48 timepoint) {\n            return timepoint;\n        } catch {\n            return SafeCast.toUint48(block.number);\n        }\n    }\n\n    /**\n     * @dev Machine-readable description of the clock as specified in EIP-6372.\n     */\n    // solhint-disable-next-line func-name-mixedcase\n    function CLOCK_MODE() public view virtual override returns (string memory) {\n        try token.CLOCK_MODE() returns (string memory clockmode) {\n            return clockmode;\n        } catch {\n            return \"mode=blocknumber&from=default\";\n        }\n    }\n\n    /**\n     * Read the voting weight from the token's built in snapshot mechanism (see {Governor-_getVotes}).\n     */\n    function _getVotes(\n        address account,\n        uint256 timepoint,\n        bytes memory /*params*/\n    ) internal view virtual override returns (uint256) {\n        return token.getPastVotes(account, timepoint);\n    }\n}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
     "exportedSymbols": {
@@ -2224,7 +2224,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T18:32:00.157Z",
+  "updatedAt": "2025-09-15T16:40:19.361Z",
   "devdoc": {
     "details": "Extension of {Governor} for voting weight extraction from an {ERC20Votes} token, or since v4.5 an {ERC721Votes} token. _Available since v4.3._",
     "errors": {

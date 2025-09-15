@@ -86,7 +86,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.9.0) (interfaces/IERC2612.sol)\n\npragma solidity ^0.8.0;\n\nimport \"../token/ERC20/extensions/IERC20Permit.sol\";\n\ninterface IERC2612 is IERC20Permit {}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2612.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2612.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC2612.sol",
     "exportedSymbols": {
@@ -170,7 +170,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T12:28:56.092Z",
+  "updatedAt": "2025-09-15T15:55:13.483Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

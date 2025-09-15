@@ -30,7 +30,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.9.4) (metatx/ERC2771Context.sol)\n\npragma solidity ^0.8.9;\n\nimport \"../utils/Context.sol\";\n\n/**\n * @dev Context variant with ERC2771 support.\n *\n * WARNING: The usage of `delegatecall` in this contract is dangerous and may result in context corruption.\n * Any forwarded request to this contract triggering a `delegatecall` to itself will result in an invalid {_msgSender}\n * recovery.\n */\nabstract contract ERC2771Context is Context {\n    /// @custom:oz-upgrades-unsafe-allow state-variable-immutable\n    address private immutable _trustedForwarder;\n\n    /// @custom:oz-upgrades-unsafe-allow constructor\n    constructor(address trustedForwarder) {\n        _trustedForwarder = trustedForwarder;\n    }\n\n    function isTrustedForwarder(address forwarder) public view virtual returns (bool) {\n        return forwarder == _trustedForwarder;\n    }\n\n    function _msgSender() internal view virtual override returns (address) {\n        uint256 calldataLength = msg.data.length;\n        uint256 contextSuffixLength = _contextSuffixLength();\n        if (isTrustedForwarder(msg.sender) && calldataLength >= contextSuffixLength) {\n            return address(bytes20(msg.data[calldataLength - contextSuffixLength:]));\n        } else {\n            return super._msgSender();\n        }\n    }\n\n    function _msgData() internal view virtual override returns (bytes calldata) {\n        uint256 calldataLength = msg.data.length;\n        uint256 contextSuffixLength = _contextSuffixLength();\n        if (isTrustedForwarder(msg.sender) && calldataLength >= contextSuffixLength) {\n            return msg.data[:calldataLength - contextSuffixLength];\n        } else {\n            return super._msgData();\n        }\n    }\n\n    /**\n     * @dev ERC-2771 specifies the context as being a single address (20 bytes).\n     */\n    function _contextSuffixLength() internal view virtual override returns (uint256) {\n        return 20;\n    }\n}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/metatx/ERC2771Context.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/metatx/ERC2771Context.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/metatx/ERC2771Context.sol",
     "exportedSymbols": {
@@ -1600,7 +1600,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T12:28:56.094Z",
+  "updatedAt": "2025-09-15T15:55:13.490Z",
   "devdoc": {
     "details": "Context variant with ERC2771 support. WARNING: The usage of `delegatecall` in this contract is dangerous and may result in context corruption. Any forwarded request to this contract triggering a `delegatecall` to itself will result in an invalid {_msgSender} recovery.",
     "kind": "dev",

@@ -219,7 +219,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.9.0) (interfaces/IERC5805.sol)\n\npragma solidity ^0.8.0;\n\nimport \"../governance/utils/IVotes.sol\";\nimport \"./IERC6372.sol\";\n\ninterface IERC5805 is IERC6372, IVotes {}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC5805.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC5805.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/interfaces/IERC5805.sol",
     "exportedSymbols": {
@@ -337,7 +337,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T12:28:56.094Z",
+  "updatedAt": "2025-09-15T15:55:13.489Z",
   "devdoc": {
     "events": {
       "DelegateChanged(address,address,address)": {

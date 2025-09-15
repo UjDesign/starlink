@@ -43,7 +43,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// Copyright 2021-2022, Offchain Labs, Inc.\n// For license information, see https://github.com/nitro/blob/master/LICENSE\n// SPDX-License-Identifier: BUSL-1.1\n// OpenZeppelin Contracts (last updated v4.8.0) (vendor/arbitrum/IDelayedMessageProvider.sol)\n\n// solhint-disable-next-line compiler-version\npragma solidity >=0.6.9 <0.9.0;\n\ninterface IDelayedMessageProvider {\n    /// @dev event emitted when a inbox message is added to the Bridge's delayed accumulator\n    event InboxMessageDelivered(uint256 indexed messageNum, bytes data);\n\n    /// @dev event emitted when a inbox message is added to the Bridge's delayed accumulator\n    /// same as InboxMessageDelivered but the batch data is available in tx.input\n    event InboxMessageDeliveredFromOrigin(uint256 indexed messageNum);\n}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IDelayedMessageProvider.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IDelayedMessageProvider.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/vendor/arbitrum/IDelayedMessageProvider.sol",
     "exportedSymbols": {
@@ -230,7 +230,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T12:28:56.156Z",
+  "updatedAt": "2025-09-15T15:55:13.702Z",
   "devdoc": {
     "events": {
       "InboxMessageDelivered(uint256,bytes)": {

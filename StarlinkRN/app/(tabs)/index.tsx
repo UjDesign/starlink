@@ -1,98 +1,138 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, SafeAreaView } from 'react-native';
+import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
+import NFTCard from '../../components/NFTCard';
+import { API_URL } from '@env';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+interface Nft {
+  _id: string;
+  title: string;
+  description: string;
+  ipfsHash: string;
+}
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const [nfts, setNfts] = useState<Nft[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const auth = useContext(AuthContext);
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  useEffect(() => {
+    console.log('🔍 [DEBUG] (tabs)/index.tsx - Home screen loaded');
+    console.log('🔍 [DEBUG] (tabs)/index.tsx - Auth state:', {
+      loading: auth?.loading,
+      hasUser: !!auth?.user,
+      hasToken: !!auth?.user?.token
+    });
+  }, [auth?.loading, auth?.user]);
+
+  useEffect(() => {
+    const fetchNfts = async () => {
+      console.log('🔍 [DEBUG] (tabs)/index.tsx - Starting NFT fetch...');
+      setLoading(true);
+      try {
+        console.log('🔍 [DEBUG] (tabs)/index.tsx - Making API request to:', `${API_URL}/nfts`);
+        const response = await axios.get<Nft[]>(`${API_URL}/nfts`, {
+          headers: {
+            Authorization: `Bearer ${auth?.user?.token}`,
+          },
+        });
+        console.log('🔍 [DEBUG] (tabs)/index.tsx - NFT fetch successful, count:', response.data.length);
+        setNfts(response.data);
+      } catch (error) {
+        console.error('🚨 [DEBUG] (tabs)/index.tsx - Error fetching NFTs:', error);
+        if (error.response) {
+          console.error('🚨 [DEBUG] (tabs)/index.tsx - Response error:', error.response.data);
+        }
+      } finally {
+        setLoading(false);
+        console.log('🔍 [DEBUG] (tabs)/index.tsx - NFT fetch completed, loading set to false');
+      }
+    };
+
+    if (auth?.user) {
+      console.log('🔍 [DEBUG] (tabs)/index.tsx - User exists, fetching NFTs');
+      fetchNfts();
+    } else {
+      console.log('❌ [DEBUG] (tabs)/index.tsx - No user, skipping NFT fetch');
+      setLoading(false);
+    }
+  }, [auth?.user]);
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.centerContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text style={styles.loadingText}>Loading NFTs...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Starlink NFT Marketplace</Text>
+      <Text style={styles.subtitle}>Discover and collect unique NFTs</Text>
+      {nfts.length > 0 ? (
+        <FlatList
+          data={nfts}
+          renderItem={({ item }) => <NFTCard nft={item} />}
+          keyExtractor={(item) => item._id}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>No NFTs available yet</Text>
+          <Text style={styles.emptySubtext}>Check back later or create your first NFT!</Text>
+        </View>
+      )}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
   },
-  stepContainer: {
-    gap: 8,
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#333',
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#666',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  emptySubtext: {
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
   },
 });
