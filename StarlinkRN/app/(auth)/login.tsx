@@ -1,22 +1,18 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
-import { Link, useRouter } from 'expo-router';
-import { API_URL } from '@env';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { Link } from 'expo-router';
+import { useAuth } from '@/hooks/useAuth';
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const auth = useContext(AuthContext);
-  const router = useRouter();
+  const { login, isLoading } = useAuth();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${API_URL}/api/users/login`, { email, password });
-      auth?.login(response.data.token);
+      await login(email, password);
     } catch (error) {
-      console.error('Login failed:', error);
+      Alert.alert('Login Failed', error.message || 'Please try again');
     }
   };
 
@@ -40,10 +36,10 @@ const LoginScreen: React.FC = () => {
         secureTextEntry
         textContentType="password"
       />
-      <Button title="Login" onPress={handleLogin} />
+      <Button title={isLoading ? "Logging in..." : "Login"} onPress={handleLogin} disabled={isLoading} />
       <View style={styles.footer}>
-        <Text>Don't have an account? </Text>
-        <Link href="/register">
+        <Text>Don&apos;t have an account? </Text>
+        <Link href="/(auth)/register">
           <Text style={styles.link}>Register</Text>
         </Link>
       </View>

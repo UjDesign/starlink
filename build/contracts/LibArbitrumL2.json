@@ -373,7 +373,7 @@
   "sourceMap": "753:975:395:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "753:975:395:-:0;;;;;;;;;;;;;;;;;;;;;;;;918:75;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;951:42;918:75;:::o;7:126:1436:-;44:7;84:42;77:5;73:54;62:65;;7:126;;;:::o;139:96::-;176:7;205:24;223:5;205:24;:::i;:::-;194:35;;139:96;;;:::o;241:126::-;336:24;354:5;336:24;:::i;:::-;331:3;324:37;241:126;;:::o;373:238::-;474:4;512:2;501:9;497:18;489:26;;525:79;601:1;590:9;586:17;577:6;525:79;:::i;:::-;373:238;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.8.0) (crosschain/arbitrum/LibArbitrumL2.sol)\n\npragma solidity ^0.8.4;\n\nimport {IArbSys as ArbitrumL2_Bridge} from \"../../vendor/arbitrum/IArbSys.sol\";\nimport \"../errors.sol\";\n\n/**\n * @dev Primitives for cross-chain aware contracts for\n * https://arbitrum.io/[Arbitrum].\n *\n * This version should only be used on L2 to process cross-chain messages\n * originating from L1. For the other side, use {LibArbitrumL1}.\n *\n * WARNING: There is currently a bug in Arbitrum that causes this contract to\n * fail to detect cross-chain calls when deployed behind a proxy. This will be\n * fixed when the network is upgraded to Arbitrum Nitro, currently scheduled for\n * August 31st 2022.\n */\nlibrary LibArbitrumL2 {\n    /**\n     * @dev Returns whether the current function call is the result of a\n     * cross-chain message relayed by `arbsys`.\n     */\n    address public constant ARBSYS = 0x0000000000000000000000000000000000000064;\n\n    function isCrossChain(address arbsys) internal view returns (bool) {\n        return ArbitrumL2_Bridge(arbsys).wasMyCallersAddressAliased();\n    }\n\n    /**\n     * @dev Returns the address of the sender that triggered the current\n     * cross-chain message through `arbsys`.\n     *\n     * NOTE: {isCrossChain} should be checked before trying to recover the\n     * sender, as it will revert with `NotCrossChainCall` if the current\n     * function call is not the result of a cross-chain message.\n     */\n    function crossChainSender(address arbsys) internal view returns (address) {\n        if (!isCrossChain(arbsys)) revert NotCrossChainCall();\n\n        return ArbitrumL2_Bridge(arbsys).myCallersAddressWithoutAliasing();\n    }\n}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL2.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL2.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL2.sol",
     "exportedSymbols": {
@@ -1002,7 +1002,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T18:32:00.130Z",
+  "updatedAt": "2025-09-15T16:40:19.339Z",
   "devdoc": {
     "details": "Primitives for cross-chain aware contracts for https://arbitrum.io/[Arbitrum]. This version should only be used on L2 to process cross-chain messages originating from L1. For the other side, use {LibArbitrumL1}. WARNING: There is currently a bug in Arbitrum that causes this contract to fail to detect cross-chain calls when deployed behind a proxy. This will be fixed when the network is upgraded to Arbitrum Nitro, currently scheduled for August 31st 2022.",
     "kind": "dev",

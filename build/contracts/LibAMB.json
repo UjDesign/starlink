@@ -10,7 +10,7 @@
   "sourceMap": "377:826:391:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "377:826:391:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.7.0) (crosschain/amb/LibAMB.sol)\n\npragma solidity ^0.8.4;\n\nimport {IAMB as AMB_Bridge} from \"../../vendor/amb/IAMB.sol\";\nimport \"../errors.sol\";\n\n/**\n * @dev Primitives for cross-chain aware contracts using the\n * https://docs.tokenbridge.net/amb-bridge/about-amb-bridge[AMB]\n * family of bridges.\n */\nlibrary LibAMB {\n    /**\n     * @dev Returns whether the current function call is the result of a\n     * cross-chain message relayed by `bridge`.\n     */\n    function isCrossChain(address bridge) internal view returns (bool) {\n        return msg.sender == bridge;\n    }\n\n    /**\n     * @dev Returns the address of the sender that triggered the current\n     * cross-chain message through `bridge`.\n     *\n     * NOTE: {isCrossChain} should be checked before trying to recover the\n     * sender, as it will revert with `NotCrossChainCall` if the current\n     * function call is not the result of a cross-chain message.\n     */\n    function crossChainSender(address bridge) internal view returns (address) {\n        if (!isCrossChain(bridge)) revert NotCrossChainCall();\n        return AMB_Bridge(bridge).messageSender();\n    }\n}\n",
-  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/crosschain/amb/LibAMB.sol",
+  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/crosschain/amb/LibAMB.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/crosschain/amb/LibAMB.sol",
     "exportedSymbols": {
@@ -567,7 +567,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-14T18:32:00.114Z",
+  "updatedAt": "2025-09-15T16:40:19.337Z",
   "devdoc": {
     "details": "Primitives for cross-chain aware contracts using the https://docs.tokenbridge.net/amb-bridge/about-amb-bridge[AMB] family of bridges.",
     "kind": "dev",

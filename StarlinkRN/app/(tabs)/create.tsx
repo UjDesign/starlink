@@ -5,14 +5,14 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { API_URL } from '@env';
 // You'll need to get the ABI from your compiled contract
-import ContentNFT from '../../contracts/ContentNFT.json'; 
+// import ContentNFT from '../../contracts/ContentNFT.json'; 
 
-const CreateNFT_ADDRESS = process.env.CONTENT_NFT_ADDRESS;
+// const CreateNFT_ADDRESS = process.env.CONTENT_NFT_ADDRESS;
 
 const CreateScreen: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [file, setFile] = useState<any>(null); // In a real app, you'd use a file picker
+  const [file] = useState<any>(null); // In a real app, you'd use a file picker
   const [loading, setLoading] = useState<boolean>(false);
   const auth = useContext(AuthContext);
 
@@ -27,17 +27,19 @@ const CreateScreen: React.FC = () => {
     // ...
 
     try {
-      const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+      const provider = new ethers.BrowserProvider((window as any).ethereum);
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(CreateNFT_ADDRESS!, ContentNFT.abi, signer);
+      // const contract = new ethers.Contract(CreateNFT_ADDRESS!, ContentNFT.abi, signer);
 
-      const transaction = await contract.mint(title, description, fileUrl);
-      await transaction.wait();
+      // const transaction = await contract.mint(title, description, fileUrl);
+      // await transaction.wait();
 
-      const tokenId = await contract.getTokenId();
+      // const tokenId = await contract.getTokenId();
+      const fileUrl = 'placeholder-url'; // TODO: Implement IPFS upload
+      const tokenId = '1'; // TODO: Get actual token ID
 
       await axios.post(`${API_URL}/api/nfts`, {
-        tokenId: tokenId.toString(),
+        tokenId: tokenId,
         title,
         description,
         ipfsHash: fileUrl,
