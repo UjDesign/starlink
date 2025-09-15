@@ -1,5 +1,12 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
+
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-require('dotenv').config({ path: '../.env' });
+
+// Add a check to ensure the private key is loaded
+if (!process.env.PRIVATE_KEY) {
+  throw new Error("PRIVATE_KEY is not set in the .env file. Please ensure it is defined.");
+}
 
 // Defensively remove '0x' prefix if it exists
 const privateKey = process.env.PRIVATE_KEY.startsWith('0x')
@@ -7,20 +14,11 @@ const privateKey = process.env.PRIVATE_KEY.startsWith('0x')
   : process.env.PRIVATE_KEY;
 
 module.exports = {
-  networks: {
-    development: {
-      host: "127.0.0.1",
-      port: 7545,
-      network_id: "*",
-      networkCheckTimeout: 10000 // Add this line (in milliseconds)
-    },
-    amoy: {
-      provider: () => new HDWalletProvider(privateKey, process.env.PROVIDER_URL),
-      network_id: 97,       // Replace with your network id
-      gas: 6721975,         // Replace with your gas limit
-      gasPrice: 20000000000 // Replace with your gas price
-    }
-  },
+  // 修正路径：以项目根目录为起点
+  contracts_directory: './contracts',          // 正确：根目录下的 contracts 文件夹
+  contracts_build_directory: './build/contracts', // 建议：根目录下单独的 build 文件夹（避免与 contracts 嵌套）
+  migrations_directory: './migrations',        // 迁移脚本放在根目录 migrations 文件夹（而非 contracts/migrations）
+  test_directory: './test',                    // 测试脚本放在根目录 test 文件夹
 
   // Configure your compilers
   compilers: {
@@ -35,6 +33,17 @@ module.exports = {
        evmVersion: "paris"
       }
     }
+  },
+
+  // 网络配置
+  networks: {
+    development: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: "*",
+      networkCheckTimeout: 10000 // Add this line (in milliseconds)
+    },
+
   },
 
   // Set default mocha options here, use special reporters, etc.
