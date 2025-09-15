@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from 'expo-router';
 
 interface AuthContextType {
   user: { token: string } | null;
@@ -14,32 +13,51 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<{ token: string } | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const checkToken = async () => {
+      console.log('🔍 [DEBUG] AuthContext - Starting token check...');
       setLoading(true);
-      const token = await AsyncStorage.getItem('token');
-      if (token) {
-        setUser({ token });
-        router.replace('/(tabs)/home');
+      try {
+        const token = await AsyncStorage.getItem('token');
+        console.log('🔍 [DEBUG] AuthContext - Retrieved token:', token ? 'EXISTS' : 'NULL');
+        if (token) {
+          setUser({ token });
+          console.log('✅ [DEBUG] AuthContext - User set with token');
+        } else {
+          console.log('❌ [DEBUG] AuthContext - No token found');
+        }
+      } catch (error) {
+        console.error('🚨 [DEBUG] AuthContext - Error checking token:', error);
+      } finally {
+        setLoading(false);
+        console.log('🔍 [DEBUG] AuthContext - Token check completed, loading set to false');
       }
-      setLoading(false);
     };
 
     checkToken();
   }, []);
 
   const login = async (token: string) => {
-    await AsyncStorage.setItem('token', token);
-    setUser({ token });
-    router.replace('/(tabs)/home');
+    console.log('🔍 [DEBUG] AuthContext - Login called with token');
+    try {
+      await AsyncStorage.setItem('token', token);
+      setUser({ token });
+      console.log('✅ [DEBUG] AuthContext - Login successful, user set');
+    } catch (error) {
+      console.error('🚨 [DEBUG] AuthContext - Login error:', error);
+    }
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem('token');
-    setUser(null);
-    router.replace('/login');
+    console.log('🔍 [DEBUG] AuthContext - Logout called');
+    try {
+      await AsyncStorage.removeItem('token');
+      setUser(null);
+      console.log('✅ [DEBUG] AuthContext - Logout successful, user cleared');
+    } catch (error) {
+      console.error('🚨 [DEBUG] AuthContext - Logout error:', error);
+    }
   };
 
   return (
