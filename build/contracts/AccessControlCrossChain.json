@@ -228,7 +228,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.6.0) (access/AccessControlCrossChain.sol)\n\npragma solidity ^0.8.4;\n\nimport \"./AccessControl.sol\";\nimport \"../crosschain/CrossChainEnabled.sol\";\n\n/**\n * @dev An extension to {AccessControl} with support for cross-chain access management.\n * For each role, is extension implements an equivalent \"aliased\" role that is used for\n * restricting calls originating from other chains.\n *\n * For example, if a function `myFunction` is protected by `onlyRole(SOME_ROLE)`, and\n * if an address `x` has role `SOME_ROLE`, it would be able to call `myFunction` directly.\n * A wallet or contract at the same address on another chain would however not be able\n * to call this function. In order to do so, it would require to have the role\n * `_crossChainRoleAlias(SOME_ROLE)`.\n *\n * This aliasing is required to protect against multiple contracts living at the same\n * address on different chains but controlled by conflicting entities.\n *\n * _Available since v4.6._\n */\nabstract contract AccessControlCrossChain is AccessControl, CrossChainEnabled {\n    bytes32 public constant CROSSCHAIN_ALIAS = keccak256(\"CROSSCHAIN_ALIAS\");\n\n    /**\n     * @dev See {AccessControl-_checkRole}.\n     */\n    function _checkRole(bytes32 role) internal view virtual override {\n        if (_isCrossChain()) {\n            _checkRole(_crossChainRoleAlias(role), _crossChainSender());\n        } else {\n            super._checkRole(role);\n        }\n    }\n\n    /**\n     * @dev Returns the aliased role corresponding to `role`.\n     */\n    function _crossChainRoleAlias(bytes32 role) internal pure virtual returns (bytes32) {\n        return role ^ CROSSCHAIN_ALIAS;\n    }\n}\n",
-  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/access/AccessControlCrossChain.sol",
+  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/access/AccessControlCrossChain.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/access/AccessControlCrossChain.sol",
     "exportedSymbols": {
@@ -934,7 +934,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-15T16:40:19.313Z",
+  "updatedAt": "2025-09-16T12:21:52.722Z",
   "devdoc": {
     "details": "An extension to {AccessControl} with support for cross-chain access management. For each role, is extension implements an equivalent \"aliased\" role that is used for restricting calls originating from other chains. For example, if a function `myFunction` is protected by `onlyRole(SOME_ROLE)`, and if an address `x` has role `SOME_ROLE`, it would be able to call `myFunction` directly. A wallet or contract at the same address on another chain would however not be able to call this function. In order to do so, it would require to have the role `_crossChainRoleAlias(SOME_ROLE)`. This aliasing is required to protect against multiple contracts living at the same address on different chains but controlled by conflicting entities. _Available since v4.6._",
     "events": {

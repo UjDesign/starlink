@@ -32,8 +32,8 @@ services:
   # 后端API服务
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backend/Dockerfile
     container_name: starlink-backend
     environment:
       - NODE_ENV=production

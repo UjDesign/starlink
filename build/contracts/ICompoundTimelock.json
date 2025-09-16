@@ -424,7 +424,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.6.0) (vendor/compound/ICompoundTimelock.sol)\n\npragma solidity ^0.8.0;\n\n/**\n * https://github.com/compound-finance/compound-protocol/blob/master/contracts/Timelock.sol[Compound's timelock] interface\n */\ninterface ICompoundTimelock {\n    event NewAdmin(address indexed newAdmin);\n    event NewPendingAdmin(address indexed newPendingAdmin);\n    event NewDelay(uint256 indexed newDelay);\n    event CancelTransaction(\n        bytes32 indexed txHash,\n        address indexed target,\n        uint256 value,\n        string signature,\n        bytes data,\n        uint256 eta\n    );\n    event ExecuteTransaction(\n        bytes32 indexed txHash,\n        address indexed target,\n        uint256 value,\n        string signature,\n        bytes data,\n        uint256 eta\n    );\n    event QueueTransaction(\n        bytes32 indexed txHash,\n        address indexed target,\n        uint256 value,\n        string signature,\n        bytes data,\n        uint256 eta\n    );\n\n    receive() external payable;\n\n    // solhint-disable-next-line func-name-mixedcase\n    function GRACE_PERIOD() external view returns (uint256);\n\n    // solhint-disable-next-line func-name-mixedcase\n    function MINIMUM_DELAY() external view returns (uint256);\n\n    // solhint-disable-next-line func-name-mixedcase\n    function MAXIMUM_DELAY() external view returns (uint256);\n\n    function admin() external view returns (address);\n\n    function pendingAdmin() external view returns (address);\n\n    function delay() external view returns (uint256);\n\n    function queuedTransactions(bytes32) external view returns (bool);\n\n    function setDelay(uint256) external;\n\n    function acceptAdmin() external;\n\n    function setPendingAdmin(address) external;\n\n    function queueTransaction(\n        address target,\n        uint256 value,\n        string memory signature,\n        bytes memory data,\n        uint256 eta\n    ) external returns (bytes32);\n\n    function cancelTransaction(\n        address target,\n        uint256 value,\n        string memory signature,\n        bytes memory data,\n        uint256 eta\n    ) external;\n\n    function executeTransaction(\n        address target,\n        uint256 value,\n        string memory signature,\n        bytes memory data,\n        uint256 eta\n    ) external payable returns (bytes memory);\n}\n",
-  "sourcePath": "/Users/golo/Work/CursorProjects/starlink/contracts/node_modules/@openzeppelin/contracts/vendor/compound/ICompoundTimelock.sol",
+  "sourcePath": "/Volumes/2nd-HD/github/starlink/contracts/node_modules/@openzeppelin/contracts/vendor/compound/ICompoundTimelock.sol",
   "ast": {
     "absolutePath": "project:/contracts/node_modules/@openzeppelin/contracts/vendor/compound/ICompoundTimelock.sol",
     "exportedSymbols": {
@@ -2306,7 +2306,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-09-15T15:55:13.705Z",
+  "updatedAt": "2025-09-15T17:29:49.839Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
