@@ -1,100 +1,272 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
-import { ethers } from 'ethers';
+import { 
+  View, Text, TextInput, TouchableOpacity, StyleSheet, 
+  ActivityIndicator, Alert, ScrollView, SafeAreaView 
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { Video } from 'expo-av';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { API_URL } from '@env';
-// You'll need to get the ABI from your compiled contract
-// import ContentNFT from '../../contracts/ContentNFT.json'; 
-
-// const CreateNFT_ADDRESS = process.env.CONTENT_NFT_ADDRESS;
+import { FontAwesome } from '@expo/vector-icons';
 
 const CreateScreen: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [file] = useState<any>(null); // In a real app, you'd use a file picker
+  const [tags, setTags] = useState<string>('');
+  const [isOriginal, setIsOriginal] = useState<boolean>(true);
+  const [royaltyFee, setRoyaltyFee] = useState<string>('5');
+  const [videoUri, setVideoUri] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const auth = useContext(AuthContext);
 
-  const createNFT = async () => {
-    if (!title || !description || !file) {
-      return alert('Please provide all fields');
+  // Select video from library
+  const pickVideo = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission required', 'Please grant permission to access your media library');
+      return;
     }
 
-    setLoading(true);
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 0.8,
+    });
 
-    // Upload file to IPFS and get the URL (fileUrl)
-    // ...
+    if (!result.canceled && result.assets[0]) {
+      setVideoUri(result.assets[0].uri);
+    }
+  };
+
+  // Upload content as NFT
+  const handleUpload = async () => {
+    if (!videoUri || !title) {
+      Alert.alert('Error', 'Please select a video and enter a title');
+      return;
+    }
+
+    if (!auth?.user?.userId) {
+      Alert.alert('Error', 'Please login first');
+      return;
+    }
 
     try {
-      const provider = new ethers.BrowserProvider((window as any).ethereum);
-      const signer = provider.getSigner();
-      // const contract = new ethers.Contract(CreateNFT_ADDRESS!, ContentNFT.abi, signer);
+      setLoading(true);
+      
+      // Prepare form data
+      const formData = new FormData();
+      formData.append('video', {
+        uri: videoUri,
+        type: 'video/mp4',
+        name: `video-${Date.now()}.mp4`
+      } as any);
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('tags', tags);
+      formData.append('isOriginal', isOriginal.toString());
+      formData.append('royaltyFee', royaltyFee);
+      formData.append('userId', auth.user.userId);
 
-      // const transaction = await contract.mint(title, description, fileUrl);
-      // await transaction.wait();
-
-      // const tokenId = await contract.getTokenId();
-      const fileUrl = 'placeholder-url'; // TODO: Implement IPFS upload
-      const tokenId = '1'; // TODO: Get actual token ID
-
-      await axios.post(`${API_URL}/api/nfts`, {
-        tokenId: tokenId,
-        title,
-        description,
-        ipfsHash: fileUrl,
-        owner: await signer.getAddress(),
-      }, {
-        headers: { Authorization: `Bearer ${auth?.user?.token}` }
+      const response = await axios.post(`${API_URL}/upload-content`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
-      alert('NFT created successfully!');
+      Alert.alert('Success', `Content uploaded successfully as NFT! You earned 50 STAR tokens!`);
+      
+      // Reset form
+      setTitle('');
+      setDescription('');
+      setTags('');
+      setVideoUri(null);
+      
     } catch (error) {
-      console.error(error);
-      alert('Failed to create NFT');
+      console.error('Upload error:', error);
+      Alert.alert('Error', 'Failed to upload content');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create NFT</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Title"
-        value={title}
-        onChangeText={setTitle}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Description"
-        value={description}
-        onChangeText={setDescription}
-      />
-      {/* File picker component here */}
-      <Button title="Create NFT" onPress={createNFT} />
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.uploadForm}>
+        <Text style={styles.title}>Upload Video Content</Text>
+        
+        <TouchableOpacity 
+          style={styles.videoPicker}
+          onPress={pickVideo}
+        >
+          {videoUri ? (
+            <Video
+              source={{ uri: videoUri }}
+              style={styles.previewVideo}
+              resizeMode="cover"
+            />
+          ) : (
+            <View style={styles.pickerPlaceholder}>
+              <FontAwesome name="video-camera" size={40} color="#95a5a6" />
+              <Text style={styles.pickerText}>Select Video</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Title"
+          value={title}
+          onChangeText={setTitle}
+        />
+
+        <TextInput
+          style={[styles.input, styles.textArea]}
+          placeholder="Description"
+          value={description}
+          onChangeText={setDescription}
+          multiline
+          numberOfLines={4}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Tags (comma separated)"
+          value={tags}
+          onChangeText={setTags}
+        />
+
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>Original Content</Text>
+          <TouchableOpacity
+            style={[styles.switch, isOriginal ? styles.switchOn : styles.switchOff]}
+            onPress={() => setIsOriginal(!isOriginal)}
+          >
+            <View style={[styles.switchCircle, isOriginal ? styles.switchCircleOn : styles.switchCircleOff]} />
+          </TouchableOpacity>
+        </View>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Royalty Fee (%)"
+          value={royaltyFee}
+          onChangeText={setRoyaltyFee}
+          keyboardType="numeric"
+        />
+
+        <TouchableOpacity
+          style={styles.uploadButton}
+          onPress={handleUpload}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <Text style={styles.uploadButtonText}>Upload as NFT</Text>
+          )}
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 16,
+    backgroundColor: '#f5f5f5',
+  },
+  uploadForm: {
+    padding: 20,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#333',
+  },
+  videoPicker: {
+    width: '100%',
+    height: 200,
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: '#ecf0f1',
+    marginBottom: 20,
+  },
+  previewVideo: {
+    width: '100%',
+    height: '100%',
+  },
+  pickerPlaceholder: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pickerText: {
+    marginTop: 10,
+    color: '#95a5a6',
+    fontSize: 16,
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
+    width: '100%',
+    padding: 12,
     borderWidth: 1,
-    marginBottom: 12,
-    paddingLeft: 8,
+    borderColor: '#bdc3c7',
+    borderRadius: 6,
+    marginBottom: 15,
+    fontSize: 16,
+    backgroundColor: 'white',
+  },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  switchLabel: {
+    fontSize: 16,
+  },
+  switch: {
+    width: 50,
+    height: 30,
+    borderRadius: 15,
+  },
+  switchOff: {
+    backgroundColor: '#bdc3c7',
+  },
+  switchOn: {
+    backgroundColor: '#3498db',
+  },
+  switchCircle: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: 'white',
+    marginTop: 2,
+  },
+  switchCircleOff: {
+    marginLeft: 2,
+  },
+  switchCircleOn: {
+    marginLeft: 22,
+  },
+  uploadButton: {
+    backgroundColor: '#3498db',
+    padding: 15,
+    borderRadius: 6,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  uploadButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

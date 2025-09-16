@@ -123,9 +123,9 @@ main() {
   fi
 
   # 从正确的输出文件中提取合约地址
-  # This looks for the line "contract address:" and prints the last word on that line.
-  CONTENT_NFT_ADDR=$(grep 'ContentNFT:' deploy_output.log -A 1 | grep 'contract address:' | awk '{print $NF}')
-  STAR_TOKEN_ADDR=$(grep 'StarToken:' deploy_output.log -A 1 | grep 'contract address:' | awk '{print $NF}')
+  # Extract contract addresses from Truffle migration output
+  CONTENT_NFT_ADDR=$(grep -A 10 "Replacing 'ContentNFT'" deploy_output.log | grep 'contract address:' | awk '{print $NF}')
+  STAR_TOKEN_ADDR=$(grep -A 10 "Replacing 'StarToken'" deploy_output.log | grep 'contract address:' | awk '{print $NF}')
 
   # 验证地址是否提取成功
   if [[ -z $CONTENT_NFT_ADDR || -z $STAR_TOKEN_ADDR ]]; then

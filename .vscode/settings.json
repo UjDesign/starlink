@@ -1,0 +1,13 @@
+{
+  "json.validate.enable": true,
+  "json.schemaDownload.enable": false,
+  "files.associations": {
+    "package.json": "json"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["package.json"],
+      "url": "https://json.schemastore.org/package.json"
+    }
+  ]
+}
