@@ -7,8 +7,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
-const ContentNFTABI = require('./build/contracts/ContentNFT.json');
-const StarTokenABI = require('./build/contracts/StarToken.json');
+const ContentNFTABI = require('../build/contracts/ContentNFT.json');
+const StarTokenABI = require('../build/contracts/StarToken.json');
 
 // 初始化Express应用
 const app = express();

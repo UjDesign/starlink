@@ -1,0 +1,112 @@
+[dotenv@17.2.2] injecting env (7) from .env -- tip: 📡 auto-backup env with Radar: https://dotenvx.com/radar
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/access/AccessControlCrossChain.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/CrossChainEnabled.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/amb/CrossChainEnabledAMB.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/amb/LibAMB.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/CrossChainEnabledArbitrumL1.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/CrossChainEnabledArbitrumL2.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL1.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL2.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/errors.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/optimism/CrossChainEnabledOptimism.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/optimism/LibOptimism.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/polygon/CrossChainEnabledPolygonChild.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/Governor.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/IGovernor.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/compatibility/IGovernorCompatibilityBravo.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorPreventLateQuorum.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorProposalThreshold.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorSettings.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockCompound.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesComp.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/IGovernorTimelock.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1155.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1155MetadataURI.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1155Receiver.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1363.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC165.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1820Implementer.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1820Registry.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC20.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC20Metadata.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC3156.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC4906.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721Metadata.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721Receiver.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC777.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC777Recipient.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC777Sender.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/draft-IERC2612.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol
+> Artifacts written to /Volumes/2nd-HD/github/starlink/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.24+commit.e11b9ed9.Linux.g++
+
+
+Starting migrations...
+======================
+> Network name:    'development'
+> Network id:      5777
+> Block gas limit: 6721975 (0x6691b7)
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'ContentNFT'
+   ----------------------
+   > transaction hash:    0x3873f49c0e5699b9500bd3005b4a053224a9e1bd39943940dfd7d0b49098c574
+- Blocks: 0            Seconds: 0
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x225aA937d41A79d28F2ABd2863a7Be0A23024137
+   > block number:        5
+   > block timestamp:     1757959286
+   > account:             0xFDD8101DE2B4a7B05B73213cB84597776a63A46a
+   > balance:             99.962927934674898418
+   > gas used:            2912568 (0x2c7138)
+   > gas price:           3.218236328 gwei
+   > value sent:          0 ETH
+   > total cost:          0.009373332145370304 ETH
+
+ContentNFT deployed at: 0x225aA937d41A79d28F2ABd2863a7Be0A23024137
+
+   Replacing 'StarToken'
+   ---------------------
+   > transaction hash:    0xc555d479bae65f8a3462122e9741fdb07ff2091776472a21483e5956799b6487
+- Blocks: 0            Seconds: 0
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x899ecf56aa40EBAef46FDeD8f6d21DFb02bfC812
+   > block number:        6
+   > block timestamp:     1757959286
+   > account:             0xFDD8101DE2B4a7B05B73213cB84597776a63A46a
+   > balance:             99.958930481155919182
+   > gas used:            1246766 (0x13062e)
+   > gas price:           3.206258046 gwei
+   > value sent:          0 ETH
+   > total cost:          0.003997453518979236 ETH
+
+StarToken deployed at: 0x899ecf56aa40EBAef46FDeD8f6d21DFb02bfC812
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.01337078566434954 ETH
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.01337078566434954 ETH
+
+

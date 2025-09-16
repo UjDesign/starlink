@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { Link } from 'expo-router';
-import { useAuth } from '@/hooks/useAuth';
+import { Link, router } from 'expo-router';
+import { AuthContext } from '../../context/AuthContext';
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { login, isLoading } = useAuth();
+  const [loading, setLoading] = useState<boolean>(false);
+  const auth = useContext(AuthContext);
 
   const handleLogin = async () => {
+    if (!auth) return;
+    
     try {
-      await login(email, password);
-    } catch (error) {
+      setLoading(true);
+      // For demo purposes, just navigate to tabs since we use phone registration
+      await auth.login('dummy-token', 'user-id', 'wallet-address', 100);
+      router.replace('/(tabs)');
+    } catch (error: any) {
       Alert.alert('Login Failed', error.message || 'Please try again');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,7 +44,7 @@ const LoginScreen: React.FC = () => {
         secureTextEntry
         textContentType="password"
       />
-      <Button title={isLoading ? "Logging in..." : "Login"} onPress={handleLogin} disabled={isLoading} />
+      <Button title={loading ? "Logging in..." : "Login"} onPress={handleLogin} disabled={loading} />
       <View style={styles.footer}>
         <Text>Don&apos;t have an account? </Text>
         <Link href="/(auth)/register">

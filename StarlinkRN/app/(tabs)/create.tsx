@@ -4,7 +4,7 @@ import {
   ActivityIndicator, Alert, ScrollView, SafeAreaView 
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { Video } from 'expo-av';
+import { Video, ResizeMode } from 'expo-av';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { API_URL } from '@env';
@@ -104,7 +104,7 @@ const CreateScreen: React.FC = () => {
             <Video
               source={{ uri: videoUri }}
               style={styles.previewVideo}
-              resizeMode="cover"
+              resizeMode={ResizeMode.COVER}
             />
           ) : (
             <View style={styles.pickerPlaceholder}>

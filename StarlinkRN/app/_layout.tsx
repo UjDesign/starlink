@@ -1,11 +1,8 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useFrameworkReady } from '@/hooks/useFrameworkReady';
-import { AuthProvider } from '@/hooks/useAuth';
+import { AuthProvider } from '../context/AuthContext';
 
 export default function RootLayout() {
-  useFrameworkReady();
-
   return (
     <AuthProvider>
       <Stack screenOptions={{ headerShown: false }}>
