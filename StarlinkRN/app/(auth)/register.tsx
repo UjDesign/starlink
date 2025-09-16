@@ -37,14 +37,14 @@ const RegisterScreen: React.FC = () => {
       Alert.alert(
         'Welcome to Starlink!', 
         `Account created successfully!\n\nWallet: ${response.data.walletAddress.substring(0, 10)}...\nSTAR Balance: ${response.data.starBalance}`,
-        [{ text: 'OK', onPress: () => router.replace('/(tabs)') }]
+        [{ text: 'OK', onPress: () => router.replace('/(tabs)/home') }]
       );
     } catch (error: any) {
       console.error('Registration error:', error);
       if (error.response?.status === 400) {
         Alert.alert('Info', 'User already exists. Logging you in...');
         // For existing users, we'd need to implement login logic
-        router.replace('/(tabs)');
+        router.replace('/(tabs)/home');
       } else {
         Alert.alert('Error', 'Failed to register. Please try again.');
       }

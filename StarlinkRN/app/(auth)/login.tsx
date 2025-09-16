@@ -16,7 +16,7 @@ const LoginScreen: React.FC = () => {
       setLoading(true);
       // For demo purposes, just navigate to tabs since we use phone registration
       await auth.login('dummy-token', 'user-id', 'wallet-address', 100);
-      router.replace('/(tabs)');
+      router.replace('/(tabs)/home');
     } catch (error: any) {
       Alert.alert('Login Failed', error.message || 'Please try again');
     } finally {
