@@ -1,0 +1,91 @@
+[dotenv@17.2.2] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/access/AccessControlCrossChain.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/CrossChainEnabled.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/amb/CrossChainEnabledAMB.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/amb/LibAMB.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/CrossChainEnabledArbitrumL1.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/CrossChainEnabledArbitrumL2.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL1.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/arbitrum/LibArbitrumL2.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/errors.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/optimism/CrossChainEnabledOptimism.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/optimism/LibOptimism.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/crosschain/polygon/CrossChainEnabledPolygonChild.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/Governor.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/IGovernor.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/compatibility/IGovernorCompatibilityBravo.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorPreventLateQuorum.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorProposalThreshold.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorSettings.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockCompound.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesComp.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/governance/extensions/IGovernorTimelock.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1155.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1155MetadataURI.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1155Receiver.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1363.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC165.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1820Implementer.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC1820Registry.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC20.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC20Metadata.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC3156.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC4906.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721Metadata.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC721Receiver.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC777.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC777Recipient.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/IERC777Sender.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/interfaces/draft-IERC2612.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol
+> Compiling ./contracts/node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol
+> Artifacts written to /Volumes/2nd-HD/github/starlink/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.24+commit.e11b9ed9.Linux.g++
+
+/Volumes/2nd-HD/github/starlink/node_modules/eth-block-tracker/src/polling.js:51
+        const newErr = new Error(`PollingBlockTracker - encountered an error while attempting to update latest block:\n${err.stack}`)
+                       ^
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+undefined
+    at PollingBlockTracker._performSync (/Volumes/2nd-HD/github/starlink/node_modules/eth-block-tracker/src/polling.js:51:24)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at runNextTicks (node:internal/process/task_queues:64:3)
+    at listOnTimeout (node:internal/timers:545:9)
+    at processTimers (node:internal/timers:519:7)
+UnhandledRejections detected
+Promise {
+  <rejected> {
+    code: -32603,
+    message: 'ESOCKETTIMEDOUT',
+    data: { originalError: [Object] }
+  }
+} {
+  code: -32603,
+  message: 'ESOCKETTIMEDOUT',
+  data: { originalError: { code: 'ESOCKETTIMEDOUT', connect: false } }
+}
+Promise {
+  <rejected> {
+    code: -32603,
+    message: 'ESOCKETTIMEDOUT',
+    data: { originalError: [Object] }
+  }
+} {
+  code: -32603,
+  message: 'ESOCKETTIMEDOUT',
+  data: { originalError: { code: 'ESOCKETTIMEDOUT', connect: false } }
+}
