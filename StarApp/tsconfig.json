@@ -1,8 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
+    "strict": true,
     "paths": {
       "@/*": [
         "./*"
@@ -13,7 +12,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts",
-    "types.d.ts"
+    "expo-env.d.ts"
   ]
 }
